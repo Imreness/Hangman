@@ -35,6 +35,10 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
 
+
+	//Setup the default game state
+	m_state = new DebugState();
+	m_state->Setup();
 	
 }
 
@@ -49,9 +53,9 @@ void Game::Update()
 		//Calculate Delta time once per every rendered frame
 		DeltaTime::CalculateDelta();
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		glClearColor(0.1, 0.1, 0.1, 1.0);
+		m_state->Update();
+		m_state->ProcessKeyboard(m_window);
+		m_state->Render();
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);

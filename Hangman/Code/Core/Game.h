@@ -4,6 +4,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "GameState.h"
+
+//Default gamestate
+#include "..//GameStates/DebugState.h"
+
 class Game
 {
 private:
@@ -11,6 +16,8 @@ private:
 	GLFWwindow* m_window;
 	const int m_winX, m_winY;
 
+	//Other Systems
+	GameState* m_state;
 
 	//Ticks
 	//Ticks are used to time render / game logic calls

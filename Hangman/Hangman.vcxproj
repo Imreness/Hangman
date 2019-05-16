@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\Game.cpp" />
+    <ClCompile Include="Code\GameStates\DebugState.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_demo.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_draw.cpp" />
@@ -32,6 +33,8 @@
   <ItemGroup>
     <ClInclude Include="Code\Core\delta.h" />
     <ClInclude Include="Code\Core\Game.h" />
+    <ClInclude Include="Code\Core\GameState.h" />
+    <ClInclude Include="Code\GameStates\DebugState.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui_impl_glfw.h" />

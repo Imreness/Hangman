@@ -1,13 +1,13 @@
 #pragma once
-#ifndef DELTA_TIME
-#define DELTA_TIME
+#ifndef DELTA_TIME_CLASS
+#define DELTA_TIME_CLASS
 #include <GLFW/64/glfw3.h>
 
 namespace DeltaTime
 {
-	static float deltaTime;
-	static float lastFrame;
-	static float currentFrame;
+	static double deltaTime;
+	static double lastFrame;
+	static double currentFrame;
 
 	void CalculateDelta()
 	{
