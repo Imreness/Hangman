@@ -14,14 +14,14 @@ class Game
 private:
 	//General
 	GLFWwindow* m_window;
-	const int m_winX, m_winY;
+	const int   m_winX, m_winY;
 
 	//Other Systems
 	GameState* m_state;
 
 	//Ticks
 	//Ticks are used to time render / game logic calls
-	double m_curr_renderTick = 0.0;
+	double       m_curr_renderTick = 0.0;
 	const double m_renderTick = 1.0 / 60.0;
 
 
