@@ -14,15 +14,20 @@ private:
 
 	//Ticks
 	//Ticks are used to time render / game logic calls
-	double curr_renderTick = 0.0;
-	const double renderTick = 1.0 / 60.0;
+	double m_curr_renderTick = 0.0;
+	const double m_renderTick = 1.0 / 60.0;
 
 
 public:
 	//Setup the GLFW window, check all the libaries
-	Game(const int windowX , const int windowY , const char title);
+	Game(const int windowX , const int windowY , const char* title);
 
 	void Update();
+
+	bool gameShouldClose() { return glfwWindowShouldClose(m_window); }
+
+	//TODO - Do a proper cleanup
+	void Close();
 };
 
 #endif

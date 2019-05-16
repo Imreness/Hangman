@@ -19,6 +19,12 @@
     <Filter Include="Resource Files\imgui">
       <UniqueIdentifier>{973459d4-55e2-4b38-a0bc-e0954430b052}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{c20ca2e5-2e75-4e35-8768-7ef18517a5aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{cd2baefb-9a3e-48ff-9afd-535a65081e4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +51,9 @@
     <ClCompile Include="D:\Dev\libaries\src\glad.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\Game.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h">
@@ -70,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imstb_truetype.h">
       <Filter>Resource Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Game.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\delta.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

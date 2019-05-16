@@ -1,7 +1,8 @@
 #include "Game.h"
 #include <iostream>
+#include "delta.h"
 
-Game::Game(const int windowX, const int windowY, const char title)
+Game::Game(const int windowX, const int windowY, const char* title)
 	: m_winX(windowX) , m_winY(windowY)
 {
 	//Init GLFW
@@ -12,7 +13,7 @@ Game::Game(const int windowX, const int windowY, const char title)
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	//Create window then check it
-	m_window = glfwCreateWindow(m_winX, m_winY, &title, NULL, NULL);
+	m_window = glfwCreateWindow(m_winX, m_winY, title, NULL, NULL);
 
 	if (!m_window)
 	{
@@ -40,5 +41,23 @@ Game::Game(const int windowX, const int windowY, const char title)
 void Game::Update()
 {
 	//TODO - Use Render Call instead
+	//Render
+	if (m_curr_renderTick <= glfwGetTime())
+	{
+		//Advance the tick by the specified amount
+		m_curr_renderTick += m_renderTick;
+		//Calculate Delta time once per every rendered frame
+		DeltaTime::CalculateDelta();
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glClearColor(0.1, 0.1, 0.1, 1.0);
+
+		glfwPollEvents();
+		glfwSwapBuffers(m_window);
+	}
+}
+
+void Game::Close()
+{
 }
