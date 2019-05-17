@@ -4,8 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "GameState.h"
-
 //Default gamestate
 #include "..//GameStates/DebugState.h"
 

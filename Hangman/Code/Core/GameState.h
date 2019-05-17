@@ -2,7 +2,8 @@
 #ifndef GAMESTATE_CLASS
 #define GAMESTATE_CLASS
 #include <iostream>
-#include <GLFW/64/glfw3.h>
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 
 class GameState
 {

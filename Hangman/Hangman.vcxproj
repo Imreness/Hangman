@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\Game.cpp" />
+    <ClCompile Include="Code\Core\Model.cpp" />
+    <ClCompile Include="Code\Core\Resource.cpp" />
+    <ClCompile Include="Code\Core\Shader.cpp" />
+    <ClCompile Include="Code\Core\Texture.cpp" />
     <ClCompile Include="Code\GameStates\DebugState.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_demo.cpp" />
@@ -34,6 +38,10 @@
     <ClInclude Include="Code\Core\delta.h" />
     <ClInclude Include="Code\Core\Game.h" />
     <ClInclude Include="Code\Core\GameState.h" />
+    <ClInclude Include="Code\Core\Model.h" />
+    <ClInclude Include="Code\Core\Resource.h" />
+    <ClInclude Include="Code\Core\Shader.h" />
+    <ClInclude Include="Code\Core\Texture.h" />
     <ClInclude Include="Code\GameStates\DebugState.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui.h" />
@@ -43,6 +51,10 @@
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imstb_rectpack.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imstb_textedit.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\object.frag" />
+    <None Include="Shaders\object.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
