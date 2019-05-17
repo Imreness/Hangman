@@ -19,10 +19,6 @@ Texture* Resource::loadTexture(const char* path, std::string name)
 	//TODO - Check if texture is already loaded
 	std::cout << "Path:" << path << "\nName:" << name << "\n";
 	Texture* texture = new Texture(path);
-	if (this == nullptr)
-	{
-		std::cout << "DAFUQ???\n";
-	}
 	m_TexturePool["test"] = texture;
 	return texture;
 }
