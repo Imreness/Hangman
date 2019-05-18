@@ -16,6 +16,7 @@ private:
 
 	//Other Systems
 	GameState* m_state;
+	Resource* m_res;
 
 	//Ticks
 	//Ticks are used to time render / game logic calls

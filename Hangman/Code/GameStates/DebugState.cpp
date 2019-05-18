@@ -12,11 +12,10 @@ void DebugState::ProcessKeyboard(GLFWwindow* window)
 	}
 }
 
-void DebugState::Setup()
+void DebugState::Setup(Resource* res)
 {
-	m_res = new Resource();
-	m_res->loadModel("Models/asd.blend", "test");
-	m_res->loadShader("Shaders/object.vert", "Shaders/object.frag" , "test");
+	res->loadModel("Models/asd.blend", "test");
+	res->loadShader("Shaders/object.vert", "Shaders/object.frag" , "test");
 }
 
 void DebugState::Render()
@@ -24,5 +23,5 @@ void DebugState::Render()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-	m_res->getModel("test")->Render(m_res->getShader("test"));
+	//m_res->getModel("test")->Render(m_res->getShader("test"));
 }

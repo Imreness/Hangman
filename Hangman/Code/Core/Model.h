@@ -21,6 +21,7 @@ struct Vertex
 	glm::vec3 normal;
 };
 
+
 class Model
 {
 private:
@@ -41,7 +42,7 @@ public:
 
 	Model() {};
 
-    std::string Setup(const char* Modelpath);
+	std::string Setup(const char* Modelpath);
 
 	void AttachTexture(Texture* tex) { m_tex = tex; }
 

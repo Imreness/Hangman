@@ -2,15 +2,13 @@
 #ifndef DEBUGSTATE_CLASS
 #define DEBUGSTATE_CLASS
 #include "..//Core/GameState.h"
-#include "..//Core/Resource.h"
 
+//TODO - Have render call using the Graphics class
 class DebugState : public GameState
 {
 private:
-	Model* m_model;
-	Resource* m_res;
 public:
-	virtual void Setup();
+	virtual void Setup(Resource* res);
 
 	virtual void Update();
 

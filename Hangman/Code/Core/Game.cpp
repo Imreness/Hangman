@@ -35,16 +35,16 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
 
+	m_res = new Resource();
 
 	//Setup the default game state
 	m_state = new DebugState();
-	m_state->Setup();
+	m_state->Setup(m_res);
 	
 }
 
 void Game::Update()
 {
-	//TODO - Use Render Call instead
 	//Render
 	if (m_curr_renderTick <= glfwGetTime())
 	{

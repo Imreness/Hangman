@@ -44,7 +44,14 @@ std::string Model::LoadModel(const char* path)
 	aiString str;
 	material->GetTexture(aiTextureType_DIFFUSE, 0, &str);
 
-	return std::string(str.C_Str());
+
+	std::string texturePath(str.C_Str());
+	texturePath = texturePath.substr(texturePath.find_first_of('\\') + 1);
+	std::replace(texturePath.begin(), texturePath.end(), '\\', '/');
+
+	
+
+	return texturePath;
 
 }
 

@@ -21,13 +21,12 @@ private:
 	}
 
 public:
-
 	Resource() {}
 
 	Model* loadModel(const char* path, std::string name);
 	Model* getModel (std::string name);
 
-	Texture* loadTexture(const char* path, std::string name);
+	Texture* loadTexture(const char* path);
 	Texture* getTexture (std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
