@@ -75,6 +75,9 @@
     <ClCompile Include="Code\Core\Model.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\Object.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Resource.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Object.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,15 +13,19 @@ Model* Resource::getModel(std::string name)
 
 Texture* Resource::loadTexture(const char* path)
 {
-	//TODO - Check if texture is already loaded
-	Texture* texture = new Texture(path);
-
 	std::string textureName(path);
-	textureName = textureName.substr(textureName.find_first_of('\\') + 1);
+	textureName = textureName.substr(textureName.find_first_of('/') + 1);
 	std::cout << textureName << "\n";
 
-	m_TexturePool[textureName] = texture;
-	return texture;
+	if (m_TexturePool.find(textureName) == m_TexturePool.end())
+	{
+		Texture* texture = new Texture(path);
+		m_TexturePool[textureName] = texture;
+		return texture;
+	}
+	else
+		return m_TexturePool[textureName];
+
 }
 Texture* Resource::getTexture(std::string name)
 {
