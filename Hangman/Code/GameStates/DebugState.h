@@ -10,9 +10,9 @@ private:
 public:
 	virtual void Setup(Resource* res);
 
-	virtual void Update();
+	virtual void Update(Resource* res);
 
-	virtual void Render();
+	virtual void Render(Resource* res);
 
 	virtual void ProcessKeyboard(GLFWwindow* window);
 };

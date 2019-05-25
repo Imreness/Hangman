@@ -4,11 +4,13 @@
 #include <unordered_map>
 #include <string>
 #include "Model.h"
-
+#include "Object.h"
 
 class Resource
 {
 private:
+	std::unordered_map<std::string, Object* > m_ObjectPool ;
+
 	std::unordered_map<std::string, Model*  > m_ModelPool  ;
 	std::unordered_map<std::string, Texture*> m_TexturePool;
 	std::unordered_map<std::string, Shader* > m_ShaderPool ;
@@ -20,14 +22,15 @@ private:
 
 	}
 
+
+	Model* getModel(const char* path);
+	Texture* getTexture(const char* path);
+
 public:
 	Resource() {}
 
-	Model* loadModel(const char* path, std::string name);
-	Model* getModel (std::string name);
-
-	Texture* loadTexture(const char* path);
-	Texture* getTexture (std::string name);
+	Object* SpawnObject(std::string name, const char* modelPath);
+	Object* getObject(std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
 	Shader* getShader(std::string name);

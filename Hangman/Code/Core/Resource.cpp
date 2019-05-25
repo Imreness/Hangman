@@ -1,17 +1,24 @@
 #include "Resource.h"
 
-Model* Resource::loadModel(const char* path, std::string name)
+Model* Resource::getModel(const char* path)
 {
-	Model* model = new Model();
-	model->AttachTexture(loadTexture(model->Setup(path).c_str()));
-	return model;
-}
-Model* Resource::getModel(std::string name)
-{
-	return m_ModelPool[name];
+	std::string modelName(path);
+	modelName = modelName.substr(modelName.find_first_of('/') + 1);
+	std::cout << modelName << "\n";
+
+	if (m_ModelPool.find(modelName) == m_ModelPool.end())
+	{
+		Model* model = new Model();
+		//The model's setup returns the texture path
+		model->AttachTexture(getTexture(model->Setup(path).c_str()));
+		m_ModelPool[modelName] = model;
+		return model;
+	}
+	else
+		return m_ModelPool[modelName];
 }
 
-Texture* Resource::loadTexture(const char* path)
+Texture* Resource::getTexture(const char* path)
 {
 	std::string textureName(path);
 	textureName = textureName.substr(textureName.find_first_of('/') + 1);
@@ -25,11 +32,6 @@ Texture* Resource::loadTexture(const char* path)
 	}
 	else
 		return m_TexturePool[textureName];
-
-}
-Texture* Resource::getTexture(std::string name)
-{
-	return m_TexturePool[name];
 }
 
 Shader* Resource::loadShader(const char* vertexPath, const char* fragmentPath, std::string name)
@@ -48,4 +50,22 @@ Shader* Resource::loadShader(const char* vertexPath, const char* fragmentPath, s
 Shader* Resource::getShader(std::string name)
 {
 	return m_ShaderPool[name];
+}
+
+Object* Resource::SpawnObject(std::string name, const char* modelPath)
+{
+	if (m_ObjectPool.find(name) == m_ObjectPool.end())
+	{
+		Object* obj = new Object(getModel(modelPath));
+		m_ObjectPool[name] = obj;
+		return obj;
+	}
+	else
+	{
+		return m_ObjectPool[name];
+	}
+}
+Object* Resource::getObject(std::string name)
+{
+	return m_ObjectPool[name];
 }

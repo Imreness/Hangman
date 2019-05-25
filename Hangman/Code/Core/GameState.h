@@ -14,9 +14,9 @@ public:
 	
 	virtual void Setup(Resource* res) { std::cout << "WARNING::GAMESTATE::SETUP METHOD NOT IMPLEMENTED\n"; }
 
-	virtual void Update() { std::cout << "WARNING::GAMESTATE::UPDATE METHOD NOT IMPLEMENTED\n"; }
+	virtual void Update(Resource* res) { std::cout << "WARNING::GAMESTATE::UPDATE METHOD NOT IMPLEMENTED\n"; }
 
-	virtual void Render() { std::cout << "WARNING::GAMESTATE::RENDER METHOD NOT IMPLEMENTED\n"; }
+	virtual void Render(Resource* res) { std::cout << "WARNING::GAMESTATE::RENDER METHOD NOT IMPLEMENTED\n"; }
 
 	virtual void ProcessKeyboard(GLFWwindow* window) { std::cout << "WARNING::GAMESTATE::PROCESSKEYBOARD METHOD NOT IMPLEMENTED\n"; }
 

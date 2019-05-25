@@ -1,6 +1,6 @@
 #include "DebugState.h"
 
-void DebugState::Update()
+void DebugState::Update(Resource* res)
 {
 }
 
@@ -18,7 +18,7 @@ void DebugState::Setup(Resource* res)
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag" , "test");
 }
 
-void DebugState::Render()
+void DebugState::Render(Resource* res)
 {
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
