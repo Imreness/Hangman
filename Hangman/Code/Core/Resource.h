@@ -9,6 +9,7 @@
 class Resource
 {
 private:
+	//TODO - Put this into the Graphics Class
 	std::unordered_map<std::string, Object* > m_ObjectPool ;
 
 	std::unordered_map<std::string, Model*  > m_ModelPool  ;

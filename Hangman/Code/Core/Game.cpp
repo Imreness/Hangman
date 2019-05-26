@@ -53,9 +53,9 @@ void Game::Update()
 		//Calculate Delta time once per every rendered frame
 		DeltaTime::CalculateDelta();
 
-		m_state->Update();
+		m_state->Update(m_res);
 		m_state->ProcessKeyboard(m_window);
-		m_state->Render();
+		m_state->Render(m_res);
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
