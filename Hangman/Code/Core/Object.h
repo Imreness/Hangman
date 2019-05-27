@@ -26,7 +26,9 @@ public:
 	//TODO - Implement movement (move , rotate , scale)
 	//once the physics engine is in place
 
-	void Render(Shader* shader);
+	void Render();
+
+	void AttachNewShader(Shader* shader) { m_model->AttachNewShader(shader); }
 
 };
 

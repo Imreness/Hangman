@@ -1,7 +1,8 @@
 #include "Model.h"
 
-std::string Model::Setup(const char* Modelpath)
+std::string Model::Setup(const char* Modelpath , Shader* shader)
 {
+	m_shader = shader;
 	return LoadModel(Modelpath);
 }
 
@@ -79,9 +80,9 @@ void Model::SetupVAO()
 	glBindVertexArray(0);
 }
 
-void Model::Render(Shader* shader)
+void Model::Render()
 {
-	shader->Use();
+	m_shader->Use();
 	m_tex->Use();
 
 	glBindVertexArray(m_VAO);

@@ -14,9 +14,9 @@ void DebugState::ProcessKeyboard(GLFWwindow* window)
 
 void DebugState::Setup(Resource* res)
 {
-	res->SpawnObject("debug", "Models/asd.blend");
-	res->SpawnObject("debug2", "Models/asd.blend");
-	res->loadShader("Shaders/object.vert", "Shaders/object.frag" , "test");
+	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
+	res->SpawnObject("debug", "Models/asd.blend" , "test");
+	res->SpawnObject("debug2", "Models/asd.blend", "test");
 }
 
 void DebugState::Render(Resource* res)
@@ -25,6 +25,5 @@ void DebugState::Render(Resource* res)
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	//m_res->getModel("test")->Render(m_res->getShader("test"));
-	res->getObject("debug")->Render(res->getShader("test"));
-	res->getObject("debug2")->Render(res->getShader("test"));
+	res->Render();
 }

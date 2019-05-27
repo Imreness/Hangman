@@ -1,7 +1,7 @@
 #include "Object.h"
-void Object::Render(Shader* shader)
+void Object::Render()
 {
-	m_model->Render(shader);
+	m_model->Render();
 }
 
 Object::Object(Model* model)

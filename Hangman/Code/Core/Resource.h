@@ -24,19 +24,23 @@ private:
 	}
 
 
-	Model* getModel(const char* path);
+	Model* getModel(const char* path , const char* shaderName);
 	Texture* getTexture(const char* path);
 
 public:
 	Resource() {}
 
-	Object* SpawnObject(std::string name, const char* modelPath);
+	void Render();
+
+	Object* SpawnObject(std::string name, const char* modelPath , const char* shaderName);
 	Object* getObject(std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
 	Shader* getShader(std::string name);
 
 	~Resource() { Clean(); }
+
+
 
 };
 

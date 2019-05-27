@@ -33,20 +33,21 @@ private:
 	std::vector<unsigned int> m_indicies;
 
 	Texture* m_tex;
+	Shader* m_shader;
 
 	std::string LoadModel(const char* path);
 	void SetupVAO();
 public:
 
-	//TODO - Tidy up, make it so we can the texture in one single Setup call
-
 	Model() {};
 
-	std::string Setup(const char* Modelpath);
+	std::string Setup(const char* Modelpath , Shader* shader);
+
+	void AttachNewShader(Shader* shader) { m_shader = shader; }
 
 	void AttachTexture(Texture* tex) { m_tex = tex; }
 
-	void Render(Shader* shader);
+	void Render();
 };
 
 #endif

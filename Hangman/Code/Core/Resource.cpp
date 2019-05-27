@@ -1,6 +1,6 @@
 #include "Resource.h"
 
-Model* Resource::getModel(const char* path)
+Model* Resource::getModel(const char* path , const char* shaderName)
 {
 	std::string modelName(path);
 	modelName = modelName.substr(modelName.find_first_of('/') + 1);
@@ -10,7 +10,7 @@ Model* Resource::getModel(const char* path)
 	{
 		Model* model = new Model();
 		//The model's setup returns the texture path
-		model->AttachTexture(getTexture(model->Setup(path).c_str()));
+		model->AttachTexture(getTexture(model->Setup(path, getShader(shaderName)).c_str()));
 		m_ModelPool[modelName] = model;
 		return model;
 	}
@@ -52,11 +52,11 @@ Shader* Resource::getShader(std::string name)
 	return m_ShaderPool[name];
 }
 
-Object* Resource::SpawnObject(std::string name, const char* modelPath)
+Object* Resource::SpawnObject(std::string name, const char* modelPath , const char* shaderName)
 {
 	if (m_ObjectPool.find(name) == m_ObjectPool.end())
 	{
-		Object* obj = new Object(getModel(modelPath));
+		Object* obj = new Object(getModel(modelPath,shaderName));
 		m_ObjectPool[name] = obj;
 		return obj;
 	}
@@ -68,4 +68,12 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath)
 Object* Resource::getObject(std::string name)
 {
 	return m_ObjectPool[name];
+}
+
+void Resource::Render()
+{
+	for (auto obj : m_ObjectPool)
+	{
+		obj.second->Render();
+	}
 }
