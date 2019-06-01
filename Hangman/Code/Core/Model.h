@@ -41,6 +41,8 @@ public:
 
 	Model() {};
 
+	~Model();
+
 	std::string Setup(const char* Modelpath , Shader* shader);
 
 	void AttachNewShader(Shader* shader) { m_shader = shader; }

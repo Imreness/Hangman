@@ -36,3 +36,9 @@ Texture::Texture(const char* path)
 		std::cout << "ERROR::STBI::LOAD - FAILED TO LOAD FILE AT:\n" << path << "\n";
 	}
 }
+
+Texture::~Texture()
+{
+	std::cout << "Texture deconstructor called\n";
+	glDeleteTextures(1, &m_ID);
+}

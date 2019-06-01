@@ -25,6 +25,7 @@ private:
 
 public:
 	Shader(const char* vertexPath, const char* fragmentPath);
+	~Shader();
 
 	void Use() { glUseProgram(m_ID); }
 

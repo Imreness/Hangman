@@ -64,4 +64,5 @@ void Game::Update()
 
 void Game::Close()
 {
+	delete m_res;
 }

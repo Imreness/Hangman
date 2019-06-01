@@ -77,6 +77,12 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	glDeleteShader(fragment);
 }
 
+Shader::~Shader()
+{
+	std::cout << "Shader deconstructor called\n";
+	glDeleteProgram(m_ID);
+}
+
 //Setting uniforms
 void Shader::setUniform(const char* name , glm::mat4& value)
 {

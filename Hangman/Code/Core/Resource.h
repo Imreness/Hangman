@@ -17,15 +17,10 @@ private:
 	std::unordered_map<std::string, Shader* > m_ShaderPool ;
 
 
-	//TODO - Implement Cleaning
-	void Clean()
-	{
-
-	}
-
-
 	Model* getModel(const char* path , const char* shaderName);
 	Texture* getTexture(const char* path);
+
+	void Clean();
 
 public:
 	Resource() {}

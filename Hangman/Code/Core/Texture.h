@@ -10,6 +10,7 @@ private:
 	unsigned int m_ID;
 public:
 	Texture(const char* path);
+	~Texture();
 
 	void Use()
 	{

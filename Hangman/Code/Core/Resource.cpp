@@ -77,3 +77,25 @@ void Resource::Render()
 		obj.second->Render();
 	}
 }
+
+void Resource::Clean()
+{
+	std::cout << "Game deconstructor called\n";
+	for (auto x : m_ModelPool)
+	{
+		delete x.second;
+	}
+	m_ModelPool.clear();
+
+	for (auto x : m_TexturePool)
+	{
+		delete x.second;
+	}
+	m_TexturePool.clear();
+
+	for (auto x : m_ShaderPool)
+	{
+		delete x.second;
+	}
+	m_ShaderPool.clear();
+}

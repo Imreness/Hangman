@@ -32,7 +32,6 @@ public:
 
 	bool gameShouldClose() { return glfwWindowShouldClose(m_window); }
 
-	//TODO - Do a proper cleanup
 	void Close();
 };
 

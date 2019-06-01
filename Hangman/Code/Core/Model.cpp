@@ -89,3 +89,14 @@ void Model::Render()
 	glDrawElements(GL_TRIANGLES, m_indicies.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
+
+Model::~Model()
+{
+	std::cout << "Model deconstructor called\n";
+	glDeleteVertexArrays(1, &m_VAO);
+	glDeleteBuffers(1, &m_VBO);
+	glDeleteBuffers(1, &m_EBO);
+
+	m_vertices.clear();
+	m_indicies.clear();
+}
