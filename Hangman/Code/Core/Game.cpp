@@ -36,10 +36,10 @@ Game::Game(const int windowX, const int windowY, const char* title)
 
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
 	glfwSetCursorPosCallback(m_window, mousecallback);
+
+	//Fixes problems with texture loading
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	m_res = new Resource();
 
@@ -64,6 +64,7 @@ void Game::Update()
 		//Update Camera
 		m_cam->Mouselook(mouseXPos, mouseYPos);
 
+		//Update the gamestate
 		m_state->Update(m_res , m_cam);
 		m_state->ProcessKeyboard(m_window , m_cam , DeltaTime::deltaTime);
 		m_state->Render(m_res , m_cam);

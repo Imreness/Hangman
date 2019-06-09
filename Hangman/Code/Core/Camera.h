@@ -19,6 +19,7 @@ enum class CameraMovement_DEBUG
 	RIGHT
 };
 
+//An On-rails animation based or debug freecam for 3D
 class Camera
 {
 private:
@@ -63,16 +64,21 @@ public:
 		updateCameraVectors();
 	}
 
+	//Used by shaders for convinient access to matrixes
 	glm::mat4& getView() { return m_view    ; }
 	glm::mat4& getProj() { return m_proj    ; }
 	glm::vec3& getPos()  { return m_position; }
 
+	
 	void Move_DEBUG(CameraMovement_DEBUG movement , float delta);
 
+	//Used by both Onrails and debugcam
 	void Mouselook(float xpos, float ypos);
 
 	void Update() { updateCameraVectors(); }
 
+
+	//Handful of parameter setting functions
 	void setShouldLook_DEBUG(bool value) { m_isLooking_DEBUG = value; }
 	void setFirstMouse_DEBUG(bool value) { m_firstMouse_DEBUG = value; }
 	void setSprint_DEBUG(bool value) { m_isSprinting_DEBUG = value; }
@@ -84,11 +90,12 @@ public:
 			glfwSetInputMode(win, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
+
+	//While the window cant change, options will enable us to do so
 	void RecalculateProjection(int width, int height)
 	{
 		m_proj = glm::perspective(m_FOV, (float)width / height, 0.01f, 100.0f);
 	}
-
 };
 
 #endif

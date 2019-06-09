@@ -36,6 +36,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	fragmentFile.open(fragmentPath);
 
 	//Set it so the files could return an error
+	//(but apparently this creates errors so idk)
 	//vertexFile  .exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	//fragmentFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try

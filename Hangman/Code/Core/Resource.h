@@ -6,12 +6,14 @@
 #include "Model.h"
 #include "Object.h"
 
+//A class to hold other media(models, textures, shaders)
 class Resource
 {
 private:
-	//TODO - Put this into the Graphics Class
+	//Higher-level pools
 	std::unordered_map<std::string, Object* > m_ObjectPool ;
 
+	//Lower-level pool
 	std::unordered_map<std::string, Model*  > m_ModelPool  ;
 	std::unordered_map<std::string, Texture*> m_TexturePool;
 	std::unordered_map<std::string, Shader* > m_ShaderPool ;
@@ -20,8 +22,8 @@ private:
 	Model* getModel(const char* path , const char* shaderName);
 	Texture* getTexture(const char* path);
 
+	//Clean all pools
 	void Clean();
-
 public:
 	Resource() {}
 
@@ -34,9 +36,6 @@ public:
 	Shader* getShader(std::string name);
 
 	~Resource() { Clean(); }
-
-
-
 };
 
 #endif 

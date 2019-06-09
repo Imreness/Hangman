@@ -3,18 +3,17 @@
 #define OBJECT_CLASS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtc/type_ptr.hpp>
 
 #include "Model.h"
 
+//Higher level Object to hold Transform or to have other class' starting point
 class Object
 {
 private:
 
 	Model* m_model;
 
-	glm::mat4 m_view = glm::mat4(1.0f);
-
+	//3D space
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
 	glm::vec3 m_scale   ;

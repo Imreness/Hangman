@@ -3,22 +3,28 @@
 std::string Model::Setup(const char* Modelpath , Shader* shader)
 {
 	m_shader = shader;
+	//Returns loaded model's texture path
 	return LoadModel(Modelpath);
 }
 
+//Return loaded model's texture path
 std::string Model::LoadModel(const char* path)
 {
+	//Import model
 	Assimp::Importer importer;
 
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
+	//Check for errors
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::LOAD - FILE:\n" << path << "\nERROR:\n" << importer.GetErrorString() << "\n";
 	}
 
+	//Get the first mesh
 	aiMesh* mesh = scene->mMeshes[scene->mRootNode->mChildren[0]->mMeshes[0]];
 
+	//Process vertices
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
@@ -29,7 +35,8 @@ std::string Model::LoadModel(const char* path)
 
 		m_vertices.push_back(vertex);
 	}
-
+	
+	//Process indicies
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
@@ -37,15 +44,16 @@ std::string Model::LoadModel(const char* path)
 			m_indicies.push_back(face.mIndices[j]);
 	}
 
+
 	SetupVAO();
 
+	//Get texture path
 	aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
 
 	aiString str;
 	material->GetTexture(aiTextureType_DIFFUSE, 0, &str);
 
-
+	//Format texture path so we can use it in our texture class
 	std::string texturePath(str.C_Str());
 	texturePath = texturePath.substr(texturePath.find_first_of('\\') + 1);
 	std::replace(texturePath.begin(), texturePath.end(), '\\', '/');
@@ -56,6 +64,7 @@ std::string Model::LoadModel(const char* path)
 
 }
 
+//General OpenGL VAO setting-up
 void Model::SetupVAO()
 {
 	glGenVertexArrays(1, &m_VAO);

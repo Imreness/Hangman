@@ -7,6 +7,7 @@
 class Texture
 {
 private:
+	//OpenGL ID
 	unsigned int m_ID;
 public:
 	Texture(const char* path);

@@ -6,6 +6,8 @@
 
 //Default gamestate
 #include "..//GameStates/DebugState.h"
+
+//A master-system handler
 class Game
 {
 private:
@@ -34,5 +36,6 @@ public:
 	void Close();
 };
 
+//Since GLFW is a C libary, it cannot use classes, hence this is outside of the Game class
 void mousecallback(GLFWwindow* win, double xpos, double ypos);
 #endif

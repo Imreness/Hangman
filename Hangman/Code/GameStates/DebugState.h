@@ -3,7 +3,7 @@
 #define DEBUGSTATE_CLASS
 #include "..//Core/GameState.h"
 
-//TODO - Have render call using the Graphics class
+
 class DebugState : public GameState
 {
 private:

@@ -19,6 +19,7 @@
 class Shader
 {
 private:
+	//OpenGL ID
 	unsigned int m_ID;
 
 	void CheckError(unsigned int ID, bool isProgram);
@@ -29,7 +30,7 @@ public:
 
 	void Use() { glUseProgram(m_ID); }
 
-	//Setting values (Matrixes , vectors etc.)
+	//Setting values (Matrixes , vectors , texture ID's etc.)
 	void setUniform(const char* name , int        value);
 	void setUniform(const char* name , float      value);
 	void setUniform(const char* name , glm::mat4& value);

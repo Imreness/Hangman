@@ -7,6 +7,7 @@
 #include "Resource.h"
 #include "Camera.h"
 
+//A base for all other Gamestates to inherit from
 class GameState
 {
 public:
