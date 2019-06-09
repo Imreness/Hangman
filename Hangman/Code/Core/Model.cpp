@@ -80,10 +80,14 @@ void Model::SetupVAO()
 	glBindVertexArray(0);
 }
 
-void Model::Render()
+void Model::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 {
 	m_shader->Use();
 	m_tex->Use();
+
+	m_shader->setUniform("modelMat", model);
+	m_shader->setUniform("viewMat", viewMatrix);
+	m_shader->setUniform("projMat", projMatrix);
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indicies.size(), GL_UNSIGNED_INT, 0);
@@ -92,7 +96,6 @@ void Model::Render()
 
 Model::~Model()
 {
-	std::cout << "Model deconstructor called\n";
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
 	glDeleteBuffers(1, &m_EBO);

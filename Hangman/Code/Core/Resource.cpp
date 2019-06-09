@@ -70,17 +70,16 @@ Object* Resource::getObject(std::string name)
 	return m_ObjectPool[name];
 }
 
-void Resource::Render()
+void Resource::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix)
 {
 	for (auto obj : m_ObjectPool)
 	{
-		obj.second->Render();
+		obj.second->Render(viewMatrix, projMatrix);
 	}
 }
 
 void Resource::Clean()
 {
-	std::cout << "Game deconstructor called\n";
 	for (auto x : m_ModelPool)
 	{
 		delete x.second;

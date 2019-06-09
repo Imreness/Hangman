@@ -35,6 +35,8 @@ private:
 	Texture* m_tex;
 	Shader* m_shader;
 
+	glm::mat4 model = glm::mat4(1.0f);
+
 	std::string LoadModel(const char* path);
 	void SetupVAO();
 public:
@@ -49,7 +51,7 @@ public:
 
 	void AttachTexture(Texture* tex) { m_tex = tex; }
 
-	void Render();
+	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 };
 
 #endif

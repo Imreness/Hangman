@@ -26,7 +26,7 @@ public:
 	//TODO - Implement movement (move , rotate , scale)
 	//once the physics engine is in place
 
-	void Render();
+	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
 	void AttachNewShader(Shader* shader) { m_model->AttachNewShader(shader); }
 

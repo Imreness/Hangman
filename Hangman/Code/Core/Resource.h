@@ -25,7 +25,7 @@ private:
 public:
 	Resource() {}
 
-	void Render();
+	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
 	Object* SpawnObject(std::string name, const char* modelPath , const char* shaderName);
 	Object* getObject(std::string name);

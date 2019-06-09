@@ -39,6 +39,5 @@ Texture::Texture(const char* path)
 
 Texture::~Texture()
 {
-	std::cout << "Texture deconstructor called\n";
 	glDeleteTextures(1, &m_ID);
 }

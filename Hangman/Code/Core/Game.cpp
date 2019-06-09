@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <iostream>
 #include "delta.h"
+double mouseXPos = 0, mouseYPos = 0;
+
 
 Game::Game(const int windowX, const int windowY, const char* title)
 	: m_winX(windowX) , m_winY(windowY)
@@ -35,12 +37,15 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
 
+	glfwSetCursorPosCallback(m_window, mousecallback);
+
 	m_res = new Resource();
 
 	//Setup the default game state
 	m_state = new DebugState();
 	m_state->Setup(m_res);
-	
+
+	m_cam = new Camera(windowX, windowY);
 }
 
 void Game::Update()
@@ -50,12 +55,16 @@ void Game::Update()
 	{
 		//Advance the tick by the specified amount
 		m_curr_renderTick += m_renderTick;
+
 		//Calculate Delta time once per every rendered frame
 		DeltaTime::CalculateDelta();
 
-		m_state->Update(m_res);
-		m_state->ProcessKeyboard(m_window);
-		m_state->Render(m_res);
+		//Update Camera
+		m_cam->Mouselook(mouseXPos, mouseYPos);
+
+		m_state->Update(m_res , m_cam);
+		m_state->ProcessKeyboard(m_window , m_cam , DeltaTime::deltaTime);
+		m_state->Render(m_res , m_cam);
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
@@ -65,4 +74,9 @@ void Game::Update()
 void Game::Close()
 {
 	delete m_res;
+}
+
+void mousecallback(GLFWwindow* win, double xpos, double ypos)
+{
+	mouseXPos = xpos; mouseYPos = ypos;
 }

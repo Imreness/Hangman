@@ -6,12 +6,12 @@
 
 //Default gamestate
 #include "..//GameStates/DebugState.h"
-
 class Game
 {
 private:
 	//General
 	GLFWwindow* m_window;
+	Camera* m_cam;
 	const int   m_winX, m_winY;
 
 	//Other Systems
@@ -22,7 +22,6 @@ private:
 	//Ticks are used to time render / game logic calls
 	double       m_curr_renderTick = 0.0;
 	const double m_renderTick = 1.0 / 60.0;
-
 
 public:
 	//Setup the GLFW window, check all the libaries
@@ -35,4 +34,5 @@ public:
 	void Close();
 };
 
+void mousecallback(GLFWwindow* win, double xpos, double ypos);
 #endif

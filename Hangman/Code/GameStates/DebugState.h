@@ -10,11 +10,11 @@ private:
 public:
 	virtual void Setup(Resource* res);
 
-	virtual void Update(Resource* res);
+	virtual void Update(Resource* res , Camera* cam);
 
-	virtual void Render(Resource* res);
+	virtual void Render(Resource* res , Camera* cam);
 
-	virtual void ProcessKeyboard(GLFWwindow* window);
+	virtual void ProcessKeyboard(GLFWwindow* window , Camera* cam , float delta);
 };
 
 #endif
