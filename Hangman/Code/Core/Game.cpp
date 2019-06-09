@@ -37,6 +37,8 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
 
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
 	glfwSetCursorPosCallback(m_window, mousecallback);
 
 	m_res = new Resource();

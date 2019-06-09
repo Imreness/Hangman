@@ -4,9 +4,9 @@
 void Camera::updateCameraVectors()
 {
 	glm::vec3 front;
-	front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-	front.y = sin(glm::radians(m_pitch));
-	front.z = cos(glm::radians(m_pitch)) * sin(glm::radians(m_yaw));
+	front.x = cos(glm::radians(m_yaw_DEBUG)) * cos(glm::radians(m_pitch_DEBUG));
+	front.y = sin(glm::radians(m_pitch_DEBUG));
+	front.z = cos(glm::radians(m_pitch_DEBUG)) * sin(glm::radians(m_yaw_DEBUG));
 
 	front = glm::normalize(front);
 	m_front = front;
@@ -71,16 +71,16 @@ void Camera::Mouselook(float xpos, float ypos)
 			xOffset *= m_lookSens_DEBUG;
 			yOffset *= m_lookSens_DEBUG;
 
-			m_yaw += xOffset;
-			m_pitch += yOffset;
+			m_yaw_DEBUG += xOffset;
+			m_pitch_DEBUG += yOffset;
 
 			m_lastx_DEBUG = xpos;
 			m_lasty_DEBUG = ypos;
 
-			if (m_pitch >= 89.f)
-				m_pitch = 89.f;
-			else if (m_pitch < -89.f)
-				m_pitch = -89.f;
+			if (m_pitch_DEBUG >= 89.f)
+				m_pitch_DEBUG = 89.f;
+			else if (m_pitch_DEBUG < -89.f)
+				m_pitch_DEBUG = -89.f;
 
 
 			updateCameraVectors();

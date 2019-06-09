@@ -51,8 +51,10 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam , float delta)
 void DebugState::Setup(Resource* res)
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
-	res->SpawnObject("debug", "Models/asd.blend" , "test");
-	res->SpawnObject("debug2", "Models/asd.blend", "test");
+
+	res->SpawnObject("homo", "Models/sphere.blend", "test");
+
+	res->SpawnObject("megahomo", "Models/asd.blend", "test");
 }
 
 void DebugState::Render(Resource* res , Camera* cam)
