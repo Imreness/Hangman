@@ -7,9 +7,9 @@
  * Created by: Imre "Imreness" Barta
  * 
  * Feel free to use this code however you like; for educational,
- * personal and Commercial purposes
+ * personal and commercial purposes
  *.....................................................................
-*/
+ */
 
 int main()
 {
