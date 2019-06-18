@@ -41,11 +41,13 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Fixes problems with texture loading
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+	m_physics = new PhysicsEngine();
+
 	m_res = new Resource();
 
 	//Setup the default game state
 	m_state = new DebugState();
-	m_state->Setup(m_res);
+	m_state->Setup(m_res, m_physics->getWorld());
 
 	m_cam = new Camera(windowX, windowY);
 }
@@ -59,15 +61,24 @@ void Game::Update()
 		m_curr_renderTick += m_renderTick;
 
 		//Calculate Delta time once per every rendered frame
+		//AND
+		//Update phyiscs
 		DeltaTime::CalculateDelta();
+
+		m_physics->Update(m_renderTick);
 
 		//Update Camera
 		m_cam->Mouselook(mouseXPos, mouseYPos);
 
+		//Update general mouse pos
+		m_cam->UpdateMousePos_OVERALL(mouseXPos, mouseYPos);
+
 		//Update the gamestate
-		m_state->Update(m_res , m_cam);
-		m_state->ProcessKeyboard(m_window , m_cam , DeltaTime::deltaTime);
-		m_state->Render(m_res , m_cam);
+		//TODO - Possible bottle neck, ask physics get world once, then contribute
+		//the pointer to all the other systems
+		m_state->Update(m_res , m_cam , m_physics->getWorld());
+		m_state->ProcessKeyboard(m_window , m_cam, m_physics->getWorld(),m_res, DeltaTime::deltaTime);
+		m_state->Render(m_res , m_cam , m_physics->getWorld());
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);

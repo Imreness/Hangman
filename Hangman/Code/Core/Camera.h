@@ -40,6 +40,8 @@ private:
 
 
 	//TODO - Implement ON-rails cam
+	float m_lastx_OVERALL, m_lasty_OVERALL;
+
 	
 	//DEBUG freecam parameters
 	float m_yaw_DEBUG, m_pitch_DEBUG;
@@ -68,12 +70,18 @@ public:
 	glm::mat4& getView() { return m_view    ; }
 	glm::mat4& getProj() { return m_proj    ; }
 	glm::vec3& getPos()  { return m_position; }
-
+	float getMouseX_DEBUG() { return m_lastx_DEBUG; }
+	float getMouseY_DEBUG() { return m_lasty_DEBUG; }
+	float getMouseX_OVERALL() { return m_lastx_OVERALL; }
+	float getMouseY_OVERALL() { return m_lasty_OVERALL; }
 	
 	void Move_DEBUG(CameraMovement_DEBUG movement , float delta);
 
 	//Used by both Onrails and debugcam
 	void Mouselook(float xpos, float ypos);
+
+	//IF YOU WANT UPDATE CAMERA LOOKING, USE MOUSELOOK FUNCTION!!!
+	void UpdateMousePos_OVERALL(float xpos, float ypos);
 
 	void Update() { updateCameraVectors(); }
 

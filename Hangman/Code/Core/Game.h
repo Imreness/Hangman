@@ -3,6 +3,7 @@
 #define GAME_CLASS
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Physics.h"
 
 //Default gamestate
 #include "..//GameStates/DebugState.h"
@@ -19,6 +20,7 @@ private:
 	//Other Systems
 	GameState* m_state;
 	Resource* m_res;
+	PhysicsEngine* m_physics;
 
 	//Ticks
 	//Ticks are used to time render / game logic calls

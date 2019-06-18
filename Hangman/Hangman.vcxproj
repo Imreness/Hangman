@@ -23,6 +23,7 @@
     <ClCompile Include="Code\Core\Game.cpp" />
     <ClCompile Include="Code\Core\Model.cpp" />
     <ClCompile Include="Code\Core\Object.cpp" />
+    <ClCompile Include="Code\Core\Physics.cpp" />
     <ClCompile Include="Code\Core\Resource.cpp" />
     <ClCompile Include="Code\Core\Shader.cpp" />
     <ClCompile Include="Code\Core\Texture.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="Code\Core\GameState.h" />
     <ClInclude Include="Code\Core\Model.h" />
     <ClInclude Include="Code\Core\Object.h" />
+    <ClInclude Include="Code\Core\Physics.h" />
     <ClInclude Include="Code\Core\Resource.h" />
     <ClInclude Include="Code\Core\Shader.h" />
     <ClInclude Include="Code\Core\Texture.h" />

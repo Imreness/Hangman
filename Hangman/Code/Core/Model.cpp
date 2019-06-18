@@ -94,13 +94,19 @@ void Model::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 	m_shader->Use();
 	m_tex->Use();
 
-	m_shader->setUniform("modelMat", model);
+	m_shader->setUniform("modelMat", m_model);
 	m_shader->setUniform("viewMat", viewMatrix);
 	m_shader->setUniform("projMat", projMatrix);
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indicies.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+}
+
+void Model::TranslateMatrix(glm::vec3 amount)
+{
+	m_model = glm::mat4(1.0f);
+	m_model = glm::translate(m_model, amount);
 }
 
 Model::~Model()

@@ -87,3 +87,8 @@ void Camera::Mouselook(float xpos, float ypos)
 		}
 	}
 }
+
+void Camera::UpdateMousePos_OVERALL(float xpos, float ypos)
+{
+	m_lastx_OVERALL = xpos; m_lasty_OVERALL = ypos;
+}

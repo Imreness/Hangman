@@ -4,6 +4,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <string>
+
+#include <bullet/btBulletDynamicsCommon.h>
+
 #include "Model.h"
 
 //Higher level Object to hold Transform or to have other class' starting point
@@ -13,19 +17,29 @@ private:
 
 	Model* m_model;
 
+	std::string m_name;
+
 	//3D space
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
 	glm::vec3 m_scale   ;
 
+	//Physics
+	btRigidBody* m_body;
+	btCollisionShape* m_colShape;
+
 public:
 
-	Object(Model* model);
+	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld);
 
 	//TODO - Implement movement (move , rotate , scale)
 	//once the physics engine is in place
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
+
+	void Translate(glm::vec3 amount);
+
+	std::string getName() { return m_name; }
 
 	void AttachNewShader(Shader* shader) { m_model->AttachNewShader(shader); }
 

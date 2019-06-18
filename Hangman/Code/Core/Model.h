@@ -39,7 +39,7 @@ private:
 	Shader* m_shader;
 
 	//ModelMatrix for OpenGL
-	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 m_model = glm::mat4(1.0f);
 
 	//From file
 	std::string LoadModel(const char* path);
@@ -57,6 +57,10 @@ public:
 	void AttachTexture(Texture* tex) { m_tex = tex; }
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
+
+	std::vector<Vertex> GetVertices() { return m_vertices; }
+
+	void TranslateMatrix(glm::vec3 amount);
 };
 
 #endif

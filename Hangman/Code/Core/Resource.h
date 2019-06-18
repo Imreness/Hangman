@@ -6,6 +6,8 @@
 #include "Model.h"
 #include "Object.h"
 
+#include <bullet/btBulletDynamicsCommon.h>
+
 //A class to hold other media(models, textures, shaders)
 class Resource
 {
@@ -29,7 +31,7 @@ public:
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
-	Object* SpawnObject(std::string name, const char* modelPath , const char* shaderName);
+	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld);
 	Object* getObject(std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
