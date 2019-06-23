@@ -16,7 +16,7 @@ public:
 	
 	virtual void Setup(Resource* res,btDynamicsWorld* physicsWorld) { std::cout << "WARNING::GAMESTATE::SETUP METHOD NOT IMPLEMENTED\n"; }
 
-	virtual void Update(Resource* res , Camera* cam,btDynamicsWorld* physicsWorld) { std::cout << "WARNING::GAMESTATE::UPDATE METHOD NOT IMPLEMENTED\n"; }
+	virtual void Update(Resource* res , Camera* cam,btDynamicsWorld* physicsWorld , float delta) { std::cout << "WARNING::GAMESTATE::UPDATE METHOD NOT IMPLEMENTED\n"; }
 
 	virtual void Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld) { std::cout << "WARNING::GAMESTATE::RENDER METHOD NOT IMPLEMENTED\n"; }
 

@@ -50,17 +50,22 @@ public:
 
 	~Model();
 
-	std::string Setup(const char* Modelpath , Shader* shader);
-
-	void AttachNewShader(Shader* shader) { m_shader = shader; }
-
-	void AttachTexture(Texture* tex) { m_tex = tex; }
-
-	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
 	std::vector<Vertex> GetVertices() { return m_vertices; }
 
+
+
+	std::string Setup(const char* Modelpath , Shader* shader);
+
+	void AttachNewShader(Shader* shader) { m_shader = shader; }
+	void AttachTexture(Texture* tex) { m_tex = tex; }
+
+
+	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
+
 	void TranslateMatrix(glm::vec3 amount);
+	void RotateMatrix(glm::vec3 amount, float angle);
+	void ScaleMatrix(glm::vec3 amount);
 };
 
 #endif

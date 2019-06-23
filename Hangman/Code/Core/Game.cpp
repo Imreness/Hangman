@@ -76,7 +76,7 @@ void Game::Update()
 		//Update the gamestate
 		//TODO - Possible bottle neck, ask physics get world once, then contribute
 		//the pointer to all the other systems
-		m_state->Update(m_res , m_cam , m_physics->getWorld());
+		m_state->Update(m_res , m_cam , m_physics->getWorld() , DeltaTime::deltaTime);
 		m_state->ProcessKeyboard(m_window , m_cam, m_physics->getWorld(),m_res, DeltaTime::deltaTime);
 		m_state->Render(m_res , m_cam , m_physics->getWorld());
 

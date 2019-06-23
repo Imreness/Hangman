@@ -26,8 +26,8 @@ private:
 
 	//Physics
 	btRigidBody* m_body;
+	btCollisionObject* m_colObject;
 	btCollisionShape* m_colShape;
-
 public:
 
 	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld);
@@ -37,7 +37,9 @@ public:
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
-	void Translate(glm::vec3 amount);
+	void Translate(glm::vec3 amount , bool resetLastpos = false);
+	void Rotate(float x, float y, float z, bool resetLastrot = false);
+	void Scale(glm::vec3 amount, bool resetLastscale = true);
 
 	std::string getName() { return m_name; }
 

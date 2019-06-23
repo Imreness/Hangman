@@ -1,13 +1,13 @@
 #include "DebugState.h"
 
-void DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld)
+void DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld , float delta)
 {
 	cam->Update();
 }
 
+
 void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWorld* physicsWorld, Resource* res, float delta)
 {
-
 	if (glfwGetKey(window, GLFW_KEY_F9) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
@@ -48,6 +48,36 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 		cam->setCursorLock_DEBUG(window, false);
 	}
 
+
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Translate(glm::vec3(0.0, 3 * delta, 0.0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Translate(glm::vec3(0.0, -3 * delta, 0.0));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Scale(glm::vec3(0.01, 0.01, 0.01), false);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Scale(-glm::vec3(0.01, 0.01, 0.01), false);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_KP_7) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Rotate(0, 0.1, 0);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_9) == GLFW_PRESS)
+	{
+		res->getObject("homo")->Rotate(0, -0.1, 0);
+	}
+
+
+	//Raycast
 	if (glfwGetMouseButton(window , 0) == GLFW_PRESS)
 	{
 		int windowWidth, windowHeight;
@@ -98,12 +128,12 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 		if (rayCallback.hasHit())
 		{
 			std::cout << ((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() << "\n";;
-			res->getObject("guide2")->Translate(glm::vec3(rayCallback.m_hitPointWorld[0].x(),
-				rayCallback.m_hitPointWorld[0].y(),
-				rayCallback.m_hitPointWorld[0].z()));
+			//res->getObject("guide2")->Translate(glm::vec3(rayCallback.m_hitPointWorld[0].x(),
+			//	rayCallback.m_hitPointWorld[0].y(),
+			//	rayCallback.m_hitPointWorld[0].z()));
 		}
 
-		res->getObject("guide1")->Translate(startPos);
+		//res->getObject("guide1")->Translate(startPos, true);
 
 	}
 }
@@ -113,8 +143,8 @@ void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
 
 	res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld);
-	res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
-	res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
+	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
+	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
 }
 
 void DebugState::Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld)

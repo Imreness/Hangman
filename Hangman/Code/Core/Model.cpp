@@ -109,6 +109,16 @@ void Model::TranslateMatrix(glm::vec3 amount)
 	m_model = glm::translate(m_model, amount);
 }
 
+void Model::RotateMatrix(glm::vec3 amount, float angle)
+{
+	m_model = glm::rotate(m_model, angle, amount);
+}
+
+void Model::ScaleMatrix(glm::vec3 amount)
+{
+	m_model = glm::scale(m_model, amount);
+}
+
 Model::~Model()
 {
 	glDeleteVertexArrays(1, &m_VAO);

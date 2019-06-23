@@ -9,7 +9,7 @@ private:
 public:
 	virtual void Setup(Resource* res, btDynamicsWorld* physicsWorld);
 
-	virtual void Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld);
+	void Update(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld, float delta);
 
 	virtual void Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld);
 

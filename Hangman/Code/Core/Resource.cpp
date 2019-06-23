@@ -57,6 +57,10 @@ Shader* Resource::loadShader(const char* vertexPath, const char* fragmentPath, s
 //Get an ALREADY LOADED shader
 Shader* Resource::getShader(std::string name)
 {
+	if (m_ShaderPool.find(name) == m_ShaderPool.end())
+	{
+		std::cout << "ERROR::RESOURCE::GETSHADER - No shader named: " << name << " found.\n";
+	}
 	return m_ShaderPool[name];
 }
 
@@ -77,6 +81,10 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath , const ch
 //Get an ALREADY SPAWNED OBJECT
 Object* Resource::getObject(std::string name)
 {
+	if (m_ObjectPool.find(name) == m_ObjectPool.end())
+	{
+		std::cout << "ERROR::RESOURCE::GETOBJECT - No object named: " << name << " found.\n";
+	}
 	return m_ObjectPool[name];
 }
 
