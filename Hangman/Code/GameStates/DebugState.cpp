@@ -112,7 +112,7 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 		Raydir_world = glm::normalize(Raydir_world);
 
 		glm::vec3 startPos = RayStart_world;
-		glm::vec3 endPos = startPos + Raydir_world * 5.f;
+		glm::vec3 endPos = startPos + Raydir_world * 100.f;
 
 		btCollisionWorld::AllHitsRayResultCallback rayCallback(
 			btVector3(startPos.x, startPos.y, startPos.z),
