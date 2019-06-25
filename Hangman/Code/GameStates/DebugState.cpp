@@ -80,39 +80,10 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 	//Raycast
 	if (glfwGetMouseButton(window , 0) == GLFW_PRESS)
 	{
-		int windowWidth, windowHeight;
-		glfwGetWindowSize(window, &windowWidth, &windowHeight);
+		Mouse3DPosition MousePos = cam->getMouse3DPositions(window);
 
-		//std::cout << "Mouse pos: " << cam->getMouseX_OVERALL() << " " << cam->getMouseY_OVERALL() << "\n" <<
-		//	"Window Size: " << windowWidth << " " << windowHeight << "\n";
-
-		//Raycast
-		glm::vec4 RayStart_NDC(
-			((float)cam->getMouseX_OVERALL() / windowWidth - 0.5f) * 2.0f,
-			(((float)cam->getMouseY_OVERALL() / windowHeight - 0.5f) * 2.0f) * -1.f,
-			-1.0f,
-			1.0f
-		);
-
-		glm::vec4 RayEnd_NDC(
-			((float)cam->getMouseX_OVERALL() / windowWidth - 0.5f) * 2.0f,
-			(((float)cam->getMouseY_OVERALL() / windowHeight - 0.5f) * 2.0f) * -1.f,
-			0.0f,
-			1.0f
-		);
-
-
-		glm::mat4 M = glm::inverse(cam->getProj() * cam->getView());
-
-		glm::vec4 RayStart_world = M * RayStart_NDC; RayStart_world /= RayStart_world.w;
-		glm::vec4 RayEnd_world = M * RayEnd_NDC; RayEnd_world /= RayEnd_world.w;
-
-		glm::vec3 Raydir_world(RayEnd_world - RayStart_world);
-
-		Raydir_world = glm::normalize(Raydir_world);
-
-		glm::vec3 startPos = RayStart_world;
-		glm::vec3 endPos = startPos + Raydir_world * 100.f;
+		glm::vec3 startPos = MousePos.StartPos;
+		glm::vec3 endPos = startPos + MousePos.Direction * 100.f;
 
 		btCollisionWorld::AllHitsRayResultCallback rayCallback(
 			btVector3(startPos.x, startPos.y, startPos.z),

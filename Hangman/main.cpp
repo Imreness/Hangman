@@ -9,7 +9,7 @@
  * Feel free to use this code however you like; for educational,
  * personal and Commercial purposes
  *.....................................................................
-*/
+ */
 
 int main()
 {

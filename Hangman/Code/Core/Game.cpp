@@ -71,7 +71,7 @@ void Game::Update()
 		m_cam->Mouselook(mouseXPos, mouseYPos);
 
 		//Update general mouse pos
-		m_cam->UpdateMousePos_OVERALL(mouseXPos, mouseYPos);
+		m_cam->UpdateMousePos(mouseXPos, mouseYPos);
 
 		//Update the gamestate
 		//TODO - Possible bottle neck, ask physics get world once, then contribute

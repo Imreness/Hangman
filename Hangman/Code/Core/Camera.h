@@ -19,6 +19,12 @@ enum class CameraMovement_DEBUG
 	RIGHT
 };
 
+struct Mouse3DPosition
+{
+	glm::vec3 Direction;
+	glm::vec3 StartPos;
+};
+
 //An On-rails animation based or debug freecam for 3D
 class Camera
 {
@@ -37,11 +43,8 @@ private:
 	//Field of view used for Onrails and debug cam
 	float m_FOV = 45.0f;
 
-
-
 	//TODO - Implement ON-rails cam
-	float m_lastx_OVERALL, m_lasty_OVERALL;
-
+	float m_mouseX, m_mouseY;
 	
 	//DEBUG freecam parameters
 	float m_yaw_DEBUG, m_pitch_DEBUG;
@@ -66,22 +69,25 @@ public:
 		updateCameraVectors();
 	}
 
+	Mouse3DPosition getMouse3DPositions(GLFWwindow* window);
+
 	//Used by shaders for convinient access to matrixes
 	glm::mat4& getView() { return m_view    ; }
 	glm::mat4& getProj() { return m_proj    ; }
 	glm::vec3& getPos()  { return m_position; }
 	float getMouseX_DEBUG() { return m_lastx_DEBUG; }
 	float getMouseY_DEBUG() { return m_lasty_DEBUG; }
-	float getMouseX_OVERALL() { return m_lastx_OVERALL; }
-	float getMouseY_OVERALL() { return m_lasty_OVERALL; }
+	float getMouseX() { return m_mouseX; }
+	float getMouseY() { return m_mouseY; }
 	
 	void Move_DEBUG(CameraMovement_DEBUG movement , float delta);
 
 	//Used by both Onrails and debugcam
 	void Mouselook(float xpos, float ypos);
 
-	//IF YOU WANT UPDATE CAMERA LOOKING, USE MOUSELOOK FUNCTION!!!
-	void UpdateMousePos_OVERALL(float xpos, float ypos);
+	//Updates general Mouse position. This is used to get mouse coordinates easily.
+	//It does NOT move the camera what so ever
+	void UpdateMousePos(float xpos, float ypos);
 
 	void Update() { updateCameraVectors(); }
 

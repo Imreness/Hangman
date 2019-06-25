@@ -16,6 +16,40 @@ void Camera::updateCameraVectors()
 	m_view = glm::lookAt(m_position, m_position + m_front, m_up);
 }
 
+Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)
+{
+	int windowWidth, windowHeight;
+
+	glfwGetWindowSize(window, &windowWidth, &windowHeight);
+
+	glm::vec4 RayStart_NDC(
+		(m_mouseX / windowWidth - 0.5f) * 2.f,
+		((m_mouseY / windowHeight - 0.5f) * 2.f) * -1.f,
+		-1.f,
+		1.f
+	);
+
+	glm::vec4 RayEnd_NDC(
+		(m_mouseX / windowWidth - 0.5f) * 2.f,
+		((m_mouseY / windowHeight - 0.5f) * 2.f) * -1.f,
+		0.f,
+		1.f
+	);
+
+	
+	glm::mat4 M = glm::inverse(m_proj * m_view);
+
+	glm::vec4 RayStart_world = M * RayStart_NDC; RayStart_world /= RayStart_world.w;
+	glm::vec4 RayEnd_world = M * RayEnd_NDC; RayEnd_world /= RayEnd_world.w;
+
+	glm::vec3 RayDir_world(RayEnd_world - RayStart_world);
+
+	Mouse3DPosition positions;
+	positions.Direction = glm::normalize(RayDir_world);
+	positions.StartPos = RayStart_world;
+	return positions;
+}
+
 void Camera::Move_DEBUG(CameraMovement_DEBUG movement, float delta)
 {
 	if (m_camMode == CameraMode::DEBUG)
@@ -88,7 +122,7 @@ void Camera::Mouselook(float xpos, float ypos)
 	}
 }
 
-void Camera::UpdateMousePos_OVERALL(float xpos, float ypos)
+void Camera::UpdateMousePos(float xpos, float ypos)
 {
-	m_lastx_OVERALL = xpos; m_lasty_OVERALL = ypos;
+	m_mouseX = xpos; m_mouseY = ypos;
 }
