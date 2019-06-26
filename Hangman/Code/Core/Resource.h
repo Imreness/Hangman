@@ -31,7 +31,7 @@ public:
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
-	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld);
+	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans);
 	Object* getObject(std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);

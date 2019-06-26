@@ -65,12 +65,12 @@ Shader* Resource::getShader(std::string name)
 }
 
 //Create an object
-Object* Resource::SpawnObject(std::string name, const char* modelPath , const char* shaderName , btDynamicsWorld* physicsWorld)
+Object* Resource::SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans)
 {
 	//Check if we already have that object spawned
 	if (m_ObjectPool.find(name) == m_ObjectPool.end())
 	{
-		Object* obj = new Object(name,getModel(modelPath,shaderName), physicsWorld);
+		Object* obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans);
 		m_ObjectPool[name] = obj;
 		return obj;
 	}

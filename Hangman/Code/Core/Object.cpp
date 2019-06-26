@@ -64,7 +64,7 @@ void Object::Scale(glm::vec3 amount , bool resetLastscale)
 		m_colShape->setLocalScaling(btVector3(amount.x, amount.y, amount.z) + m_colShape->getLocalScaling());
 }
 
-Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld)
+Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, btTransform trans)
 	: m_model(model) , m_name(name)
 {
 	btConvexHullShape* colShape = new btConvexHullShape(0, 0, sizeof(Vertex));
@@ -82,13 +82,9 @@ Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld)
 
 	m_colShape = colShape;
 
-	btTransform transform;
-	transform.setIdentity();
 	btScalar mass = 1.;
 
-	transform.setOrigin(btVector3(0., 0., 0.));
-
-	btDefaultMotionState* defMotState = new btDefaultMotionState(transform);
+	btDefaultMotionState* defMotState = new btDefaultMotionState(trans);
 
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, defMotState, m_colShape);
 	m_body = new btRigidBody(rbInfo);

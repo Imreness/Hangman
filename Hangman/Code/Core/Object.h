@@ -30,7 +30,7 @@ private:
 	btCollisionShape* m_colShape;
 public:
 
-	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld);
+	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld , btTransform trans);
 
 	//TODO - Implement movement (move , rotate , scale)
 	//once the physics engine is in place

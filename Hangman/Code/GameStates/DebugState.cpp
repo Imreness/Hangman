@@ -113,7 +113,10 @@ void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
 
-	res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld);
+
+	btTransform box1Trans;
+	box1Trans.setIdentity();
+	res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld, box1Trans);
 	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
 	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
 }
