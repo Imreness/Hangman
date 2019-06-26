@@ -10,7 +10,7 @@ PhysicsEngine::PhysicsEngine()
 
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_overlappingPairCache, m_solver, m_collisionconfig);
 
-	//We Wont need gravity, plus all the other bodies are going to be static
+	//We Wont need gravity since all the other bodies are going to be "static"
 	m_world->setGravity(btVector3(0, 0, 0));
 }
 
