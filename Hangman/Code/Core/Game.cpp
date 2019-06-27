@@ -88,6 +88,7 @@ void Game::Update()
 void Game::Close()
 {
 	delete m_res;
+	delete m_physics;
 }
 
 void mousecallback(GLFWwindow* win, double xpos, double ypos)

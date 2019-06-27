@@ -28,8 +28,10 @@ private:
 	btRigidBody* m_body;
 	btCollisionObject* m_colObject;
 	btCollisionShape* m_colShape;
+	btDynamicsWorld* m_parentWorld;
 public:
 
+	~Object();
 	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld , btTransform trans);
 
 	//TODO - Implement movement (move , rotate , scale)

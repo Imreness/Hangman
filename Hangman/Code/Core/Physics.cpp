@@ -1,4 +1,10 @@
 #include "Physics.h"
+#include <iostream>
+
+PhysicsEngine::~PhysicsEngine()
+{
+	delete m_world;
+}
 
 PhysicsEngine::PhysicsEngine()
 {

@@ -64,9 +64,16 @@ void Object::Scale(glm::vec3 amount , bool resetLastscale)
 		m_colShape->setLocalScaling(btVector3(amount.x, amount.y, amount.z) + m_colShape->getLocalScaling());
 }
 
+Object::~Object()
+{
+	m_parentWorld->removeRigidBody(m_body);
+}
+
 Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, btTransform trans)
 	: m_model(model) , m_name(name)
 {
+	m_parentWorld = physicsWorld;
+
 	btConvexHullShape* colShape = new btConvexHullShape(0, 0, sizeof(Vertex));
 
 	for (int i = 0; i < m_model->GetVertices().size(); i++)

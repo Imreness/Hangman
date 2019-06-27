@@ -15,6 +15,8 @@ private:
 	btSequentialImpulseConstraintSolver* m_solver;
 public:
 
+	~PhysicsEngine();
+
 	PhysicsEngine();
 
 	void Update(double step);

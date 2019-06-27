@@ -99,6 +99,12 @@ void Resource::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix)
 
 void Resource::Clean()
 {
+	for (auto x : m_ObjectPool)
+	{
+		delete x.second;
+	}
+	m_ObjectPool.clear();
+
 	for (auto x : m_ModelPool)
 	{
 		delete x.second;
