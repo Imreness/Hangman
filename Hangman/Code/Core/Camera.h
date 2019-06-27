@@ -44,11 +44,12 @@ private:
 	float m_FOV = 45.0f;
 
 	//TODO - Implement ON-rails cam
+
+	//Cursor's position on the screen
 	float m_mouseX, m_mouseY;
 	
 	//DEBUG freecam parameters
 	float m_yaw_DEBUG, m_pitch_DEBUG;
-
 	//Input variables
 	float m_lookSens_DEBUG = 1.f ,m_moveSpeed_DEBUG = 2.f, m_moveSpeed_DEBUG_multiplier = 3.f;
 
@@ -69,6 +70,7 @@ public:
 		updateCameraVectors();
 	}
 
+	//Get the Cursor's 3D place in space and direction
 	Mouse3DPosition getMouse3DPositions(GLFWwindow* window);
 
 	//Used by shaders for convinient access to matrixes
@@ -80,13 +82,15 @@ public:
 	float getMouseX() { return m_mouseX; }
 	float getMouseY() { return m_mouseY; }
 	
+
+	//Move the camera manually
 	void Move_DEBUG(CameraMovement_DEBUG movement , float delta);
 
 	//Used by both Onrails and debugcam
 	void Mouselook(float xpos, float ypos);
 
-	//Updates general Mouse position. This is used to get mouse coordinates easily.
-	//It does NOT move the camera what so ever
+	//Updates the cursor's position on the screen. This is used to get mouse coordinates easily.
+	//It does NOT rotate the camera what so ever
 	void UpdateMousePos(float xpos, float ypos);
 
 	void Update() { updateCameraVectors(); }
