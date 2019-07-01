@@ -65,17 +65,12 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 
 	if (glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 3., 0.), -90.f, -89.f , 0.15f);
+		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f);
 	}
 	if (glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f, 0.15f);
+		cam->SetTargetPos_rail(glm::vec3(0., 3., 0.), -90.f, -89.f);
 	}
-	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
-	{
-		cam->SetTargetPos_rail(glm::vec3(-3., 0., 0.), -0.f, 0.f, 0.15f);
-	}
-
 
 
 

@@ -31,9 +31,7 @@ struct Mouse3DPosition
 class Camera
 {
 private:
-	//TODO
-	//Start in Onrail mode once implemented
-	CameraMode m_camMode = CameraMode::DEBUG;
+	CameraMode m_camMode = CameraMode::ONRAILS;
 
 	//OpenGL
 	glm::mat4 m_view = glm::mat4(1.0f);
@@ -45,21 +43,17 @@ private:
 	//Field of view used for Onrails and debug cam
 	float m_FOV = 45.0f;
 
-	//TODO - Implement ON-rails cam
-
 	//ON-Rails camera parameters
 	//------------------------------------
 	float m_yaw_rail, m_pitch_rail;
 
 	//Interpolation
-	glm::vec3 m_targetPos;
-	glm::vec3 m_startPos;
-	float m_targetYaw, m_targetPitch;
-	float m_startYaw, m_startPitch;
+	glm::vec3 m_targetPos = glm::vec3(0.);
+	float m_targetYaw = -90.f, m_targetPitch = 0.f;
 
 	float m_interpolationSpeed = 1.f;
 	double m_interpolationTimer = 0.;
-	bool m_interolationDone = true;
+	bool m_interpolationDone = true;
 	//------------------------------------
 
 
@@ -101,12 +95,12 @@ public:
 		m_yaw_rail = -90.f;
 		m_targetYaw = -90.f;
 		m_targetPitch = 0.f;
-		m_startYaw = -90.f;
-		m_startPitch = 0.f;
 		updateCameraVectors();
 	}
 
+	//Change between debug and On-rails cam
 	void SetMode(CameraMode newmode);
+
 
 	void SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch , float interpolationSpeed = 1);
 

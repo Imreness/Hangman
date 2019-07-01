@@ -4,7 +4,7 @@
 void Camera::Update(float delta)
 {
 	updateCameraVectors();
-	if (m_camMode == CameraMode::ONRAILS && m_interolationDone == false)
+	if (m_camMode == CameraMode::ONRAILS &&  m_interpolationDone == false)
 	{
 		InterpolateToTarget(delta);
 	}
@@ -37,15 +37,18 @@ void Camera::updateCameraVectors()
 
 void Camera::InterpolateToTarget(float delta)
 {
-	if (!m_interolationDone)
+	if (!m_interpolationDone)
 	{
 		m_interpolationTimer += delta;
+
+		//All animation will have 5 seconds to finish. Thats more than enough
 		if (m_interpolationTimer >= 5)
 		{
-			std::cout << "Im done mofo!\n";
-			m_interolationDone = true;
+			m_interpolationDone = true;
 		}
 	}
+
+	//Interpolate the values with the MIX function
 	m_position = glm::mix(m_position, m_targetPos, m_interpolationTimer * m_interpolationSpeed);
 	m_yaw_rail = glm::mix(m_yaw_rail, m_targetYaw, m_interpolationTimer * m_interpolationSpeed);
 	m_pitch_rail = glm::mix(m_pitch_rail, m_targetPitch, m_interpolationTimer * m_interpolationSpeed);
@@ -53,6 +56,8 @@ void Camera::InterpolateToTarget(float delta)
 
 void Camera::SetMode(CameraMode newmode)
 {
+	m_interpolationDone = false;
+	m_interpolationTimer = 0;
 	m_camMode = newmode;
 }
 
@@ -61,7 +66,7 @@ void Camera::SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch, float inte
 	m_targetPitch = pitch; m_targetYaw = yaw; m_targetPos = pos;
 
 	m_interpolationTimer = 0.;
-	m_interolationDone = false;
+	m_interpolationDone = false;
 	m_interpolationSpeed = interpolationSpeed;
 }
 
@@ -132,9 +137,6 @@ void Camera::Move_DEBUG(CameraMovement_DEBUG movement, float delta)
 
 void Camera::Mouselook(float xpos, float ypos)
 {
-	//TODO
-	//Implement an "onrails" looking, where if you move the mouse
-	//the camera just slightly tries to look in that direction, real subtle stuff
 	if (m_camMode == CameraMode::DEBUG)
 	{
 		if (m_isLooking_DEBUG)
