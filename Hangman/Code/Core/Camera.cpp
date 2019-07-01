@@ -1,12 +1,31 @@
 #include "Camera.h"
 #include <iostream>
 
+void Camera::Update(float delta)
+{
+	updateCameraVectors();
+	if (m_camMode == CameraMode::ONRAILS && m_interolationDone == false)
+	{
+		InterpolateToTarget(delta);
+	}
+}
+
 void Camera::updateCameraVectors()
 {
 	glm::vec3 front;
-	front.x = cos(glm::radians(m_yaw_DEBUG)) * cos(glm::radians(m_pitch_DEBUG));
-	front.y = sin(glm::radians(m_pitch_DEBUG));
-	front.z = cos(glm::radians(m_pitch_DEBUG)) * sin(glm::radians(m_yaw_DEBUG));
+
+	if (m_camMode == CameraMode::ONRAILS)
+	{
+		front.x = cos(glm::radians(m_yaw_rail)) * cos(glm::radians(m_pitch_rail));
+		front.y = sin(glm::radians(m_pitch_rail));
+		front.z = cos(glm::radians(m_pitch_rail)) * sin(glm::radians(m_yaw_rail));
+	}
+	else
+	{
+		front.x = cos(glm::radians(m_yaw_DEBUG)) * cos(glm::radians(m_pitch_DEBUG));
+		front.y = sin(glm::radians(m_pitch_DEBUG));
+		front.z = cos(glm::radians(m_pitch_DEBUG)) * sin(glm::radians(m_yaw_DEBUG));
+	}
 
 	front = glm::normalize(front);
 	m_front = front;
@@ -14,6 +33,36 @@ void Camera::updateCameraVectors()
 	m_right = glm::normalize(glm::cross(m_front, m_up));
 	
 	m_view = glm::lookAt(m_position, m_position + m_front, m_up);
+}
+
+void Camera::InterpolateToTarget(float delta)
+{
+	if (!m_interolationDone)
+	{
+		m_interpolationTimer += delta;
+		if (m_interpolationTimer >= 5)
+		{
+			std::cout << "Im done mofo!\n";
+			m_interolationDone = true;
+		}
+	}
+	m_position = glm::mix(m_position, m_targetPos, m_interpolationTimer * m_interpolationSpeed);
+	m_yaw_rail = glm::mix(m_yaw_rail, m_targetYaw, m_interpolationTimer * m_interpolationSpeed);
+	m_pitch_rail = glm::mix(m_pitch_rail, m_targetPitch, m_interpolationTimer * m_interpolationSpeed);
+}
+
+void Camera::SetMode(CameraMode newmode)
+{
+	m_camMode = newmode;
+}
+
+void Camera::SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch, float interpolationSpeed)
+{
+	m_targetPitch = pitch; m_targetYaw = yaw; m_targetPos = pos;
+
+	m_interpolationTimer = 0.;
+	m_interolationDone = false;
+	m_interpolationSpeed = interpolationSpeed;
 }
 
 Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)

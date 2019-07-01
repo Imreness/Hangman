@@ -2,7 +2,7 @@
 
 void DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld , float delta)
 {
-	cam->Update();
+	cam->Update(delta);
 }
 
 
@@ -38,43 +38,45 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS)
 	{
-		cam->setShouldLook_DEBUG(true);
-		cam->setCursorLock_DEBUG(window,true);
+		if (cam->getMode() == CameraMode::DEBUG)
+		{
+			cam->setShouldLook_DEBUG(true);
+			cam->setCursorLock_DEBUG(window, true);
+		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_RELEASE)
 	{
-		cam->setShouldLook_DEBUG(false);
-		cam->setFirstMouse_DEBUG(true);
-		cam->setCursorLock_DEBUG(window, false);
+		if (cam->getMode() == CameraMode::DEBUG)
+		{
+			cam->setShouldLook_DEBUG(false);
+			cam->setFirstMouse_DEBUG(true);
+			cam->setCursorLock_DEBUG(window, false);
+		}
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_F3) == GLFW_PRESS)
+	{
+		cam->SetMode(CameraMode::ONRAILS);
+	}
+	if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS)
+	{
+		cam->SetMode(CameraMode::DEBUG);
+	}
 
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		res->getObject("homo")->Translate(glm::vec3(0.0, 3 * delta, 0.0));
-	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		res->getObject("homo")->Translate(glm::vec3(0.0, -3 * delta, 0.0));
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
-	{
-		res->getObject("homo")->Scale(glm::vec3(0.01, 0.01, 0.01), false);
-	}
 	if (glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS)
 	{
-		res->getObject("homo")->Scale(-glm::vec3(0.01, 0.01, 0.01), false);
+		cam->SetTargetPos_rail(glm::vec3(0., 3., 0.), -90.f, -89.f , 0.15f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS)
+	{
+		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f, 0.15f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
+	{
+		cam->SetTargetPos_rail(glm::vec3(-3., 0., 0.), -0.f, 0.f, 0.15f);
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_KP_7) == GLFW_PRESS)
-	{
-		res->getObject("homo")->Rotate(0, 0.1, 0);
-	}
-	if (glfwGetKey(window, GLFW_KEY_KP_9) == GLFW_PRESS)
-	{
-		res->getObject("homo")->Rotate(0, -0.1, 0);
-	}
+
 
 
 	//Raycast
