@@ -38,11 +38,11 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	glViewport(0, 0, m_winX, m_winY);
 	glfwSetCursorPosCallback(m_window, mousecallback);
 
-	//Fixes problems with texture loading
+	//Fixes issues with incorrect texture loading
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+	//Setup the other systems
 	m_physics = new PhysicsEngine();
-
 	m_res = new Resource();
 
 	//Setup the default game state
@@ -67,14 +67,13 @@ void Game::Update()
 
 		m_physics->Update(m_renderTick);
 
-		//Update Camera
+		//Update Camera and it's values
 		m_cam->Mouselook(mouseXPos, mouseYPos);
-
-		//Update general mouse pos
 		m_cam->UpdateMousePos(mouseXPos, mouseYPos);
 
-		btDynamicsWorld* physicsWorld = m_physics->getWorld();
 
+		btDynamicsWorld* physicsWorld = m_physics->getWorld();
+		//Process State
 		m_state->Update(m_res , m_cam , physicsWorld, DeltaTime::deltaTime);
 		m_state->ProcessKeyboard(m_window , m_cam, physicsWorld,m_res, DeltaTime::deltaTime);
 		m_state->Render(m_res , m_cam , physicsWorld);
@@ -86,6 +85,7 @@ void Game::Update()
 
 void Game::Close()
 {
+	//Cleanup
 	delete m_res;
 	delete m_physics;
 }

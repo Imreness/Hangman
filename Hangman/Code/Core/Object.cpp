@@ -96,7 +96,12 @@ Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, b
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, defMotState, m_colShape);
 	m_body = new btRigidBody(rbInfo);
 
+	//This way the body wont sleep. If it sleeps you cant move it.
+	//Usually this is not a problem. If something is happening to the body, it wont sleep.
+	//But since there is no gravity or anything, it'll go to sleep and then we cant animate things.
 	m_body->setSleepingThresholds(0, 0);
+
+
 	physicsWorld->addRigidBody(m_body);
 	m_body->setUserPointer(this);
 }

@@ -43,6 +43,7 @@ private:
 	//Field of view used for Onrails and debug cam
 	float m_FOV = 45.0f;
 
+
 	//ON-Rails camera parameters
 	//------------------------------------
 	float m_yaw_rail, m_pitch_rail;
@@ -82,12 +83,16 @@ private:
 
 	//Updates viewmatrix
 	void updateCameraVectors();
+
+	//"Animate" the camera
 	void InterpolateToTarget(float delta);
 public:
 
 	Camera(int screenWidth , int screenHeight ,  glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), float mouseSens = 0.25f)
 		: m_position(position), m_up(glm::vec3(0.0f, 1.0f, 0.0f)), m_lookSens_DEBUG(mouseSens)
 	{
+
+		//Set all the default values
 		m_proj = glm::perspective(m_FOV, (float)screenWidth / screenHeight, 0.01f, 100.0f);
 		m_yaw_DEBUG = -90.f;
 		m_pitch_DEBUG =   0.f;

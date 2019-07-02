@@ -9,6 +9,7 @@ class PhysicsEngine
 private:
 	btDynamicsWorld* m_world;
 
+	//DynamicsWorld's propertie
 	btDefaultCollisionConfiguration* m_collisionconfig;
 	btCollisionDispatcher* m_dispatcher;
 	btBroadphaseInterface* m_overlappingPairCache;
@@ -18,6 +19,7 @@ public:
 	~PhysicsEngine();
 
 	PhysicsEngine();
+
 
 	void Update(double step);
 

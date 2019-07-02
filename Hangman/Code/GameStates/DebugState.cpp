@@ -123,6 +123,5 @@ void DebugState::Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWor
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-	//m_res->getModel("test")->Render(m_res->getShader("test"));
 	res->Render(cam->getView() , cam->getProj());
 }

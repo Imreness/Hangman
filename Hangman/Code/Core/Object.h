@@ -36,6 +36,7 @@ public:
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
+	//Object Manipulation
 	void Translate(glm::vec3 amount , bool resetLastpos = false);
 	void Rotate(float x, float y, float z, bool resetLastrot = false);
 	void Scale(glm::vec3 amount, bool resetLastscale = true);

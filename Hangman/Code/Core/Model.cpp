@@ -111,11 +111,13 @@ void Model::TranslateMatrix(glm::vec3 amount)
 
 void Model::RotateMatrix(glm::vec3 amount, float angle)
 {
+	//We dont reset the Matrix, since Translate will be called first, and it already does that
 	m_model = glm::rotate(m_model, angle, amount);
 }
 
 void Model::ScaleMatrix(glm::vec3 amount)
 {
+	//We dont reset the Matrix, since Translate will be called first, and it already does that
 	m_model = glm::scale(m_model, amount);
 }
 

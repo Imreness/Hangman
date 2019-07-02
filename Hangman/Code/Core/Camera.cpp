@@ -14,6 +14,7 @@ void Camera::updateCameraVectors()
 {
 	glm::vec3 front;
 
+	//Calculate where should we "look"
 	if (m_camMode == CameraMode::ONRAILS)
 	{
 		front.x = cos(glm::radians(m_yaw_rail)) * cos(glm::radians(m_pitch_rail));
@@ -56,9 +57,11 @@ void Camera::InterpolateToTarget(float delta)
 
 void Camera::SetMode(CameraMode newmode)
 {
+	//Set the interpolation to default values, so when switching from debug to rails one, the camera will take its original place
 	m_interpolationDone = false;
 	m_interpolationTimer = 0;
 
+	//Set the Debug's values to the on-rails one, so the camera wont just snap away when we switch modes
 	m_yaw_DEBUG = m_yaw_rail;
 	m_pitch_DEBUG = m_pitch_rail;
 	m_camMode = newmode;
@@ -79,13 +82,13 @@ Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)
 
 	glfwGetWindowSize(window, &windowWidth, &windowHeight);
 
+	//Get the mouse as Normalized Device coordinates (clamped between 0 and 1)
 	glm::vec4 RayStart_NDC(
 		(m_mouseX / windowWidth - 0.5f) * 2.f,
 		((m_mouseY / windowHeight - 0.5f) * 2.f) * -1.f,
 		-1.f,
 		1.f
 	);
-
 	glm::vec4 RayEnd_NDC(
 		(m_mouseX / windowWidth - 0.5f) * 2.f,
 		((m_mouseY / windowHeight - 0.5f) * 2.f) * -1.f,
@@ -94,6 +97,8 @@ Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)
 	);
 
 	
+	//When we multiply the NDC values with M (Projection and View), we reverse the application of said matrixes,
+	//So we get the proper World values of the cursor
 	glm::mat4 M = glm::inverse(m_proj * m_view);
 
 	glm::vec4 RayStart_world = M * RayStart_NDC; RayStart_world /= RayStart_world.w;
