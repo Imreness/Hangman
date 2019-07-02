@@ -73,12 +73,11 @@ void Game::Update()
 		//Update general mouse pos
 		m_cam->UpdateMousePos(mouseXPos, mouseYPos);
 
-		//Update the gamestate
-		//TODO - Possible bottle neck, ask physics get world once, then contribute
-		//the pointer to all the other systems
-		m_state->Update(m_res , m_cam , m_physics->getWorld() , DeltaTime::deltaTime);
-		m_state->ProcessKeyboard(m_window , m_cam, m_physics->getWorld(),m_res, DeltaTime::deltaTime);
-		m_state->Render(m_res , m_cam , m_physics->getWorld());
+		btDynamicsWorld* physicsWorld = m_physics->getWorld();
+
+		m_state->Update(m_res , m_cam , physicsWorld, DeltaTime::deltaTime);
+		m_state->ProcessKeyboard(m_window , m_cam, physicsWorld,m_res, DeltaTime::deltaTime);
+		m_state->Render(m_res , m_cam , physicsWorld);
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);

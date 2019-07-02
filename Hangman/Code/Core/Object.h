@@ -32,10 +32,7 @@ private:
 public:
 
 	~Object();
-	Object(std::string name ,Model* model, btDynamicsWorld* physicsWorld , btTransform trans);
-
-	//TODO - Implement movement (move , rotate , scale)
-	//once the physics engine is in place
+	Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans);
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 

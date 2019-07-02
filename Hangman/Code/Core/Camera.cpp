@@ -58,6 +58,9 @@ void Camera::SetMode(CameraMode newmode)
 {
 	m_interpolationDone = false;
 	m_interpolationTimer = 0;
+
+	m_yaw_DEBUG = m_yaw_rail;
+	m_pitch_DEBUG = m_pitch_rail;
 	m_camMode = newmode;
 }
 
