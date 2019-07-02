@@ -62,7 +62,7 @@ private:
 
 
 	//Cursor's position on the screen
-	float m_mouseX, m_mouseY;
+	float m_mouseX = 0, m_mouseY = 0;
 	
 
 
@@ -75,7 +75,7 @@ private:
 	float m_lookSens_DEBUG = 1.f ,m_moveSpeed_DEBUG = 2.f, m_moveSpeed_DEBUG_multiplier = 3.f;
 
 	//Mouse Variables
-	float m_lastx_DEBUG, m_lasty_DEBUG;
+	float m_lastx_DEBUG = 0, m_lasty_DEBUG = 0;
 	bool m_firstMouse_DEBUG = true, m_isLooking_DEBUG = false , m_isSprinting_DEBUG = false;
 	//------------------------------------
 

@@ -49,7 +49,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 		vertexString   = vertexSstream.str();
 		fragmentString = fragmentSstream.str();
 	}
-	catch(std::ifstream::failure e)
+	catch(std::ifstream::failure &e)
 	{
 		std::cout << "ERROR::SHADER::FAILED_TO_LOAD\n";
 	}
