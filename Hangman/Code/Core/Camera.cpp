@@ -50,21 +50,21 @@ void Camera::InterpolateToTarget(float delta)
 	}
 
 	//Interpolate the values with the MIX function
-	m_position = glm::mix(m_position, m_targetPos, m_interpolationTimer * m_interpolationSpeed);
-	m_yaw_rail = glm::mix(m_yaw_rail, m_targetYaw, m_interpolationTimer * m_interpolationSpeed);
+	m_position   = glm::mix(m_position  , m_targetPos  , m_interpolationTimer * m_interpolationSpeed);
+	m_yaw_rail   = glm::mix(m_yaw_rail  , m_targetYaw  , m_interpolationTimer * m_interpolationSpeed);
 	m_pitch_rail = glm::mix(m_pitch_rail, m_targetPitch, m_interpolationTimer * m_interpolationSpeed);
 }
 
 void Camera::SetMode(CameraMode newmode)
 {
 	//Set the interpolation to default values, so when switching from debug to rails one, the camera will take its original place
-	m_interpolationDone = false;
+	m_interpolationDone  = false;
 	m_interpolationTimer = 0;
 
 	//Set the Debug's values to the on-rails one, so the camera wont just snap away when we switch modes
-	m_yaw_DEBUG = m_yaw_rail;
+	m_yaw_DEBUG   = m_yaw_rail;
 	m_pitch_DEBUG = m_pitch_rail;
-	m_camMode = newmode;
+	m_camMode     = newmode;
 }
 
 void Camera::SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch, float interpolationSpeed)
@@ -72,7 +72,7 @@ void Camera::SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch, float inte
 	m_targetPitch = pitch; m_targetYaw = yaw; m_targetPos = pos;
 
 	m_interpolationTimer = 0.;
-	m_interpolationDone = false;
+	m_interpolationDone  = false;
 	m_interpolationSpeed = interpolationSpeed;
 }
 
@@ -102,13 +102,13 @@ Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)
 	glm::mat4 M = glm::inverse(m_proj * m_view);
 
 	glm::vec4 RayStart_world = M * RayStart_NDC; RayStart_world /= RayStart_world.w;
-	glm::vec4 RayEnd_world = M * RayEnd_NDC; RayEnd_world /= RayEnd_world.w;
+	glm::vec4 RayEnd_world   = M * RayEnd_NDC  ; RayEnd_world  /= RayEnd_world.w;
 
 	glm::vec3 RayDir_world(RayEnd_world - RayStart_world);
 
 	Mouse3DPosition positions;
 	positions.Direction = glm::normalize(RayDir_world);
-	positions.StartPos = RayStart_world;
+	positions.StartPos  = RayStart_world;
 	return positions;
 }
 

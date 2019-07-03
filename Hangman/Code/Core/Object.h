@@ -25,10 +25,10 @@ private:
 	glm::vec3 m_scale   ;
 
 	//Physics
-	btRigidBody* m_body;
+	btRigidBody*       m_body;
 	btCollisionObject* m_colObject;
-	btCollisionShape* m_colShape;
-	btDynamicsWorld* m_parentWorld;
+	btCollisionShape*  m_colShape;
+	btDynamicsWorld*   m_parentWorld;
 public:
 
 	~Object();
@@ -38,8 +38,8 @@ public:
 
 	//Object Manipulation
 	void Translate(glm::vec3 amount , bool resetLastpos = false);
-	void Rotate(float x, float y, float z, bool resetLastrot = false);
-	void Scale(glm::vec3 amount, bool resetLastscale = true);
+	void Rotate   (float x, float y, float z, bool resetLastrot = false);
+	void Scale    (glm::vec3 amount, bool resetLastscale = true);
 
 	std::string getName() { return m_name; }
 

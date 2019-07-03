@@ -7,13 +7,15 @@ void Object::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 
 	//Modify the transform of the visual object, so it matches up with the physics one
 	m_model->TranslateMatrix(glm::vec3(transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z()));
-	m_model->RotateMatrix(glm::vec3(transform.getRotation().getAxis().x(),
-		transform.getRotation().getAxis().y(),
-		transform.getRotation().getAxis().z()),
-		transform.getRotation().getAngle());
+
+	m_model->RotateMatrix(glm::vec3(transform.getRotation().getAxis().x()   ,
+		                            transform.getRotation().getAxis().y()   ,
+		                            transform.getRotation().getAxis().z()  ),
+		                            transform.getRotation().getAngle()     );
+
 	m_model->ScaleMatrix(glm::vec3(m_colShape->getLocalScaling().x(),
-		m_colShape->getLocalScaling().y(),
-		m_colShape->getLocalScaling().z()));
+		                           m_colShape->getLocalScaling().y(),
+		                           m_colShape->getLocalScaling().z()));
 
 	m_model->Render(viewMatrix, projMatrix);
 }
@@ -103,5 +105,5 @@ Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, b
 
 
 	physicsWorld->addRigidBody(m_body);
-	m_body->setUserPointer(this);
+	m_body      ->setUserPointer(this);
 }

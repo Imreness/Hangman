@@ -14,12 +14,12 @@ class Game
 private:
 	//General
 	GLFWwindow* m_window;
-	Camera* m_cam;
+	Camera*     m_cam;
 	const int   m_winX, m_winY;
 
 	//Other Systems
-	GameState* m_state;
-	Resource* m_res;
+	GameState*     m_state;
+	Resource*      m_res;
 	PhysicsEngine* m_physics;
 
 	//Ticks

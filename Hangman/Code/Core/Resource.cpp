@@ -32,7 +32,7 @@ Texture* Resource::getTexture(const char* path)
 	//Check if we already have that texture loaded
 	if (m_TexturePool.find(textureName) == m_TexturePool.end())
 	{
-		Texture* texture = new Texture(path);
+		Texture* texture           = new Texture(path);
 		m_TexturePool[textureName] = texture;
 		return texture;
 	}
@@ -46,7 +46,7 @@ Shader* Resource::loadShader(const char* vertexPath, const char* fragmentPath, s
 	//Check if we already have that shader loaded
 	if (m_ShaderPool.find(name) == m_ShaderPool.end())
 	{
-		Shader* shader = new Shader(vertexPath , fragmentPath);
+		Shader* shader     = new Shader(vertexPath , fragmentPath);
 		m_ShaderPool[name] = shader;
 		return shader;
 	}

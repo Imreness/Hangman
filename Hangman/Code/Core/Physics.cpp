@@ -9,10 +9,10 @@ PhysicsEngine::~PhysicsEngine()
 PhysicsEngine::PhysicsEngine()
 {
 	//Setup
-	m_collisionconfig = new btDefaultCollisionConfiguration();
-	m_dispatcher = new btCollisionDispatcher(m_collisionconfig);
+	m_collisionconfig      = new btDefaultCollisionConfiguration();
+	m_dispatcher           = new btCollisionDispatcher(m_collisionconfig);
 	m_overlappingPairCache = new btDbvtBroadphase();
-	m_solver = new btSequentialImpulseConstraintSolver();
+	m_solver               = new btSequentialImpulseConstraintSolver();
 
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_overlappingPairCache, m_solver, m_collisionconfig);
 

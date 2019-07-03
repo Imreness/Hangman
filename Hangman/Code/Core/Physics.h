@@ -10,9 +10,9 @@ private:
 	btDynamicsWorld* m_world;
 
 	//DynamicsWorld's propertie
-	btDefaultCollisionConfiguration* m_collisionconfig;
-	btCollisionDispatcher* m_dispatcher;
-	btBroadphaseInterface* m_overlappingPairCache;
+	btDefaultCollisionConfiguration*     m_collisionconfig;
+	btCollisionDispatcher*               m_dispatcher;
+	btBroadphaseInterface*               m_overlappingPairCache;
 	btSequentialImpulseConstraintSolver* m_solver;
 public:
 

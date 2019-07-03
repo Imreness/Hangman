@@ -46,8 +46,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 		vertexSstream   << vertexFile.rdbuf();
 		fragmentSstream << fragmentFile.rdbuf();
 
-		vertexString   = vertexSstream.str();
-		fragmentString = fragmentSstream.str();
+		vertexString    = vertexSstream.str();
+		fragmentString  = fragmentSstream.str();
 	}
 	catch(std::ifstream::failure &e)
 	{
@@ -58,21 +58,21 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 
 	unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
 
-	glShaderSource(vertex, 1, &vertexCode, NULL);
+	glShaderSource (vertex, 1, &vertexCode, NULL);
 	glCompileShader(vertex);
-	CheckError(vertex, false);
+	CheckError     (vertex, false);
 
 	unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	
-	glShaderSource(fragment, 1, &fragmentCode, NULL);
+	glShaderSource (fragment, 1, &fragmentCode, NULL);
 	glCompileShader(fragment);
-	CheckError(fragment, false);
+	CheckError     (fragment, false);
 
 	m_ID = glCreateProgram();
 	glAttachShader(m_ID, vertex);
 	glAttachShader(m_ID, fragment);
-	glLinkProgram(m_ID);
-	CheckError(m_ID, true);
+	glLinkProgram (m_ID);
+	CheckError    (m_ID, true);
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);

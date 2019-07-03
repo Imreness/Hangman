@@ -11,8 +11,8 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE       , GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE            , GLFW_FALSE);
 
 	//Create window then check it
 	m_window = glfwCreateWindow(m_winX, m_winY, title, NULL, NULL);
@@ -43,7 +43,7 @@ Game::Game(const int windowX, const int windowY, const char* title)
 
 	//Setup the other systems
 	m_physics = new PhysicsEngine();
-	m_res = new Resource();
+	m_res     = new Resource();
 
 	//Setup the default game state
 	m_state = new DebugState();

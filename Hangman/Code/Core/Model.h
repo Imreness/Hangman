@@ -36,7 +36,7 @@ private:
 
 	//Dependencies
 	Texture* m_tex;
-	Shader* m_shader;
+	Shader*  m_shader;
 
 	//ModelMatrix for OpenGL
 	glm::mat4 m_model = glm::mat4(1.0f);

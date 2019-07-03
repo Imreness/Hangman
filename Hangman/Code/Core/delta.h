@@ -5,15 +5,15 @@
 
 namespace DeltaTime
 {
-	static double deltaTime;
-	static double lastFrame;
+	static double deltaTime   ;
+	static double lastFrame   ;
 	static double currentFrame;
 
 	void CalculateDelta()
 	{
 		currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+		deltaTime    = currentFrame - lastFrame;
+		lastFrame    = currentFrame;
 	}
 }
 

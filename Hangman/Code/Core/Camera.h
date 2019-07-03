@@ -52,9 +52,9 @@ private:
 	glm::vec3 m_targetPos = glm::vec3(0.);
 	float m_targetYaw = -90.f, m_targetPitch = 0.f;
 
-	float m_interpolationSpeed = 1.f;
-	double m_interpolationTimer = 0.;
-	bool m_interpolationDone = true;
+	float  m_interpolationSpeed = 1.f ;
+	double m_interpolationTimer = 0.  ;
+	bool   m_interpolationDone  = true;
 	//------------------------------------
 
 
@@ -94,12 +94,14 @@ public:
 
 		//Set all the default values
 		m_proj = glm::perspective(m_FOV, (float)screenWidth / screenHeight, 0.01f, 100.0f);
-		m_yaw_DEBUG = -90.f;
+
+		m_yaw_DEBUG   = -90.f;
 		m_pitch_DEBUG =   0.f;
-		m_pitch_rail = 0.f;
-		m_yaw_rail = -90.f;
-		m_targetYaw = -90.f;
-		m_targetPitch = 0.f;
+		m_pitch_rail  =   0.f;
+		m_yaw_rail    = -90.f;
+		m_targetYaw   = -90.f;
+		m_targetPitch =   0.f;
+
 		updateCameraVectors();
 	}
 
@@ -113,14 +115,14 @@ public:
 	Mouse3DPosition getMouse3DPositions(GLFWwindow* window);
 
 	//Used by shaders for convinient access to matrixes
-	glm::mat4& getView() { return m_view    ; }
-	glm::mat4& getProj() { return m_proj    ; }
-	glm::vec3& getPos()  { return m_position; }
-	float getMouseX_DEBUG() { return m_lastx_DEBUG; }
-	float getMouseY_DEBUG() { return m_lasty_DEBUG; }
-	float getMouseX() { return m_mouseX; }
-	float getMouseY() { return m_mouseY; }
-	CameraMode getMode() { return m_camMode; }
+	glm::mat4& getView()    { return m_view        ;}
+	glm::mat4& getProj()    { return m_proj        ;}
+	glm::vec3& getPos()     { return m_position    ;}
+	float getMouseX_DEBUG() { return m_lastx_DEBUG ;}
+	float getMouseY_DEBUG() { return m_lasty_DEBUG ;}
+	float getMouseX()       { return m_mouseX      ;}
+	float getMouseY()       { return m_mouseY      ;}
+	CameraMode getMode()    { return m_camMode     ;}
 	
 
 	//Move the camera manually
@@ -137,9 +139,10 @@ public:
 
 
 	//Handful of parameter setting functions
-	void setShouldLook_DEBUG(bool value) { m_isLooking_DEBUG = value; }
-	void setFirstMouse_DEBUG(bool value) { m_firstMouse_DEBUG = value; }
-	void setSprint_DEBUG(bool value) { m_isSprinting_DEBUG = value; }
+	void setShouldLook_DEBUG(bool value) { m_isLooking_DEBUG = value   ;}
+	void setFirstMouse_DEBUG(bool value) { m_firstMouse_DEBUG = value  ;}
+	void setSprint_DEBUG    (bool value) { m_isSprinting_DEBUG = value ;}
+
 	void setCursorLock_DEBUG(GLFWwindow* win,bool value)
 	{
 		if (value)

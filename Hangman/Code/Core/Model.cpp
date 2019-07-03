@@ -92,11 +92,11 @@ void Model::SetupVAO()
 void Model::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 {
 	m_shader->Use();
-	m_tex->Use();
+	m_tex   ->Use();
 
-	m_shader->setUniform("modelMat", m_model);
-	m_shader->setUniform("viewMat", viewMatrix);
-	m_shader->setUniform("projMat", projMatrix);
+	m_shader->setUniform("modelMat", m_model   );
+	m_shader->setUniform("viewMat" , viewMatrix);
+	m_shader->setUniform("projMat" , projMatrix);
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indicies.size(), GL_UNSIGNED_INT, 0);
@@ -124,8 +124,8 @@ void Model::ScaleMatrix(glm::vec3 amount)
 Model::~Model()
 {
 	glDeleteVertexArrays(1, &m_VAO);
-	glDeleteBuffers(1, &m_VBO);
-	glDeleteBuffers(1, &m_EBO);
+	glDeleteBuffers     (1, &m_VBO);
+	glDeleteBuffers     (1, &m_EBO);
 
 	m_vertices.clear();
 	m_indicies.clear();

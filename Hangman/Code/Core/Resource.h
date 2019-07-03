@@ -21,8 +21,8 @@ private:
 	std::unordered_map<std::string, Shader* > m_ShaderPool ;
 
 
-	Model* getModel(const char* path , const char* shaderName);
-	Texture* getTexture(const char* path);
+	Model*   getModel  (const char* path , const char* shaderName);
+	Texture* getTexture(const char* path)                         ;
 
 	//Clean all pools
 	void Clean();
@@ -32,10 +32,10 @@ public:
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
 	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans);
-	Object* getObject(std::string name);
+	Object* getObject  (std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
-	Shader* getShader(std::string name);
+	Shader* getShader (std::string name);
 
 	~Resource() { Clean(); }
 };
