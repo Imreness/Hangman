@@ -6,6 +6,32 @@ void DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWor
 }
 
 
+void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
+{
+	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
+
+
+	//btTransform box1Trans;
+	//box1Trans.setIdentity();
+	//res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld, box1Trans);
+
+	res->LoadTexture("Textures/button_oldman.png");
+	res->LoadTexture("Textures/boxtemplate.png");
+
+	res->SpawnObject("mainbox", "Models/button.blend", "test", physicsWorld, btTransform::getIdentity(),
+						true , res->getTexture("boxtemplate.png"));
+
+	btTransform sideboxTransform; sideboxTransform.setIdentity();
+	sideboxTransform.setOrigin(btVector3(0. , 5. , 0.));
+	res->SpawnObject("sidebox", "Models/button.blend", "test", physicsWorld, sideboxTransform,
+						true, res->getTexture("button_oldman.png"));
+
+	//Physics Debug objects
+	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
+	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
+}
+
+
 void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWorld* physicsWorld, Resource* res, float delta)
 {
 	if (glfwGetKey(window, GLFW_KEY_F9) == GLFW_PRESS)
@@ -69,7 +95,7 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 	}
 	if (glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 3., 0.), -90.f, -89.f);
+		cam->SetTargetPos_rail(glm::vec3(0., 5., 3.), -90.f, 0.f);
 	}
 
 
@@ -106,22 +132,10 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 	}
 }
 
-void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
-{
-	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
-
-
-	btTransform box1Trans;
-	box1Trans.setIdentity();
-	res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld, box1Trans);
-	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
-	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
-}
-
 void DebugState::Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld)
 {
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.f, 1.0f);
 
 	res->Render(cam->getView() , cam->getProj());
 }

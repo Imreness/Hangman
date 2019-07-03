@@ -12,7 +12,7 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 	{
 		Model* model = new Model();
 		//The model's setup returns the texture path
-		model->AttachTexture(getTexture(model->Setup(path, getShader(shaderName)).c_str()));
+		model->AttachNewTexture(LoadTexture(model->Setup(path, getShader(shaderName)).c_str()));
 		//Save it into the pool
 		m_ModelPool[modelName] = model;
 		return model;
@@ -22,7 +22,17 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 		return m_ModelPool[modelName];
 }
 
-Texture* Resource::getTexture(const char* path)
+//With the name, give it the extension(.jpg, .png, etc.)
+Texture* Resource::getTexture(std::string name)
+{
+	if (m_TexturePool.find(name) == m_TexturePool.end())
+	{
+		std::cout << "ERROR::RESOURCE::GETTEXTURE - No texture named: " << name << " found.\n";
+	}
+	return m_TexturePool[name];
+}
+
+Texture* Resource::LoadTexture(const char* path)
 {
 	//Format a name from the path
 	std::string textureName(path);
@@ -65,12 +75,17 @@ Shader* Resource::getShader(std::string name)
 }
 
 //Create an object
-Object* Resource::SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans)
+Object* Resource::SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverride, Texture* tex)
 {
 	//Check if we already have that object spawned
 	if (m_ObjectPool.find(name) == m_ObjectPool.end())
 	{
-		Object* obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans);
+		Object* obj;
+		if (textureOverride)
+			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans, true , tex);
+		else
+			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans);
+
 		m_ObjectPool[name] = obj;
 		return obj;
 	}

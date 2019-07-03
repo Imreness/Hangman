@@ -49,7 +49,7 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	m_state = new DebugState();
 	m_state->Setup(m_res, m_physics->getWorld());
 
-	m_cam = new Camera(windowX, windowY);
+	m_cam = new Camera(windowX, windowY , glm::vec3(0. , 0. , 4.));
 }
 
 void Game::Update()
@@ -63,6 +63,8 @@ void Game::Update()
 		//Calculate Delta time once per every rendered frame
 		//AND
 		//Update phyiscs
+
+
 		DeltaTime::CalculateDelta();
 
 		m_physics->Update(m_renderTick);

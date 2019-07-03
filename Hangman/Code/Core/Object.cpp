@@ -16,7 +16,8 @@ void Object::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 	m_model->ScaleMatrix(glm::vec3(m_colShape->getLocalScaling().x(),
 		                           m_colShape->getLocalScaling().y(),
 		                           m_colShape->getLocalScaling().z()));
-
+	if (m_boolOverrideTexture)
+		m_model->AttachNewTexture(m_overrideTexture);
 	m_model->Render(viewMatrix, projMatrix);
 }
 
@@ -71,7 +72,7 @@ Object::~Object()
 	m_parentWorld->removeRigidBody(m_body);
 }
 
-Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, btTransform trans)
+Object::Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverdrive, Texture* tex)
 	: m_model(model) , m_name(name)
 {
 	m_parentWorld = physicsWorld;
@@ -106,4 +107,7 @@ Object::Object(std::string name ,Model* model , btDynamicsWorld* physicsWorld, b
 
 	physicsWorld->addRigidBody(m_body);
 	m_body      ->setUserPointer(this);
+
+	m_overrideTexture = tex;
+	m_boolOverrideTexture = textureOverdrive;
 }

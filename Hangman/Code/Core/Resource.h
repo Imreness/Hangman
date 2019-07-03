@@ -22,16 +22,18 @@ private:
 
 
 	Model*   getModel  (const char* path , const char* shaderName);
-	Texture* getTexture(const char* path)                         ;
 
 	//Clean all pools
 	void Clean();
 public:
 	Resource() {}
 
+	Texture* getTexture(std::string name);
+	Texture* LoadTexture(const char* path);
+
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
-	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans);
+	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverride = false , Texture* tex = nullptr);
 	Object* getObject  (std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);

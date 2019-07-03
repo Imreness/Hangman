@@ -24,6 +24,10 @@ private:
 	glm::vec3 m_rotation;
 	glm::vec3 m_scale   ;
 
+	//Texture overriding
+	Texture* m_overrideTexture;
+	bool m_boolOverrideTexture;
+
 	//Physics
 	btRigidBody*       m_body;
 	btCollisionObject* m_colObject;
@@ -32,7 +36,7 @@ private:
 public:
 
 	~Object();
-	Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans);
+	Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverdrive = false, Texture* tex = nullptr);
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
@@ -43,7 +47,8 @@ public:
 
 	std::string getName() { return m_name; }
 
-	void AttachNewShader(Shader* shader) { m_model->AttachNewShader(shader); }
+	void AttachNewShader(Shader* shader)    { m_model->AttachNewShader(shader);   }
+	void AttachNewTexture(Texture* texture) { m_model->AttachNewTexture(texture); }
 
 };
 
