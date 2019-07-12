@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DELTA_TIME_CLASS
 #define DELTA_TIME_CLASS
-#include <GLFW/64/glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace DeltaTime
 {

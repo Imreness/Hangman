@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/matrix_interpolation.hpp>
-#include <GLFW/64/glfw3.h>
+#include <GLFW/glfw3.h>
 
 enum class CameraMode
 {
