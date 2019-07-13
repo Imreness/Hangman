@@ -44,6 +44,7 @@ Game::Game(const int windowX, const int windowY, const char* title)
 	//Setup the other systems
 	m_physics = new PhysicsEngine();
 	m_res     = new Resource();
+	m_audio   = new AudioEngine();
 
 	//Setup the default game state
 	m_state = new DebugState();

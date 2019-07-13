@@ -13,7 +13,7 @@
 
 int main()
 {
-	Game hangman(1200, 800 ,  "Hangman");
+	Game hangman(600, 400 ,  "Hangman");
 
 	while (!hangman.gameShouldClose())
 	{

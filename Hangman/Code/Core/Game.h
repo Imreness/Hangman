@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Physics.h"
+#include "Audio.h"
 
 //Default gamestate
 #include "..//GameStates/DebugState.h"
@@ -21,6 +22,7 @@ private:
 	GameState*     m_state;
 	Resource*      m_res;
 	PhysicsEngine* m_physics;
+	AudioEngine*   m_audio;
 
 	//Ticks
 	//Ticks are used to time render / game logic calls

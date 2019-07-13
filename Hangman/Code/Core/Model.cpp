@@ -89,10 +89,13 @@ void Model::SetupVAO()
 	glBindVertexArray(0);
 }
 
-void Model::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
+void Model::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix, bool useOverride, Texture* overrideTexture)
 {
 	m_shader->Use();
-	m_tex   ->Use();
+	if (useOverride)
+		overrideTexture->Use();
+	else
+		m_tex   ->Use();
 
 	m_shader->setUniform("modelMat", m_model   );
 	m_shader->setUniform("viewMat" , viewMatrix);

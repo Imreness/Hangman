@@ -17,7 +17,7 @@ void Object::Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix)
 		                           m_colShape->getLocalScaling().y(),
 		                           m_colShape->getLocalScaling().z()));
 	if (m_boolOverrideTexture)
-		m_model->AttachNewTexture(m_overrideTexture);
+		m_model->Render(viewMatrix, projMatrix, true, m_overrideTexture);
 	m_model->Render(viewMatrix, projMatrix);
 }
 

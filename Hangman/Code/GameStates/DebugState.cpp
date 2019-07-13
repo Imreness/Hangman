@@ -16,15 +16,18 @@ void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
 	//res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld, box1Trans);
 
 	res->LoadTexture("Textures/button_oldman.png");
-	res->LoadTexture("Textures/boxtemplate.png");
 
-	res->SpawnObject("mainbox", "Models/button.blend", "test", physicsWorld, btTransform::getIdentity(),
-						true , res->getTexture("boxtemplate.png"));
+	res->SpawnObject("mainbox", "Models/button.blend", "test", physicsWorld, btTransform::getIdentity());
 
 	btTransform sideboxTransform; sideboxTransform.setIdentity();
 	sideboxTransform.setOrigin(btVector3(0. , 5. , 0.));
 	res->SpawnObject("sidebox", "Models/button.blend", "test", physicsWorld, sideboxTransform,
 						true, res->getTexture("button_oldman.png"));
+
+	btTransform upperboxTransform; upperboxTransform.setIdentity();
+	upperboxTransform.setOrigin(btVector3(0., 10., 0.));
+
+	res->SpawnObject("upperbox", "Models/button.blend", "test", physicsWorld , upperboxTransform);
 
 	//Physics Debug objects
 	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
@@ -91,11 +94,15 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 
 	if (glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f);
+		cam->SetTargetPos_rail(glm::vec3(0., 5., 3.), -90.f, 0.f);
 	}
 	if (glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 5., 3.), -90.f, 0.f);
+		cam->SetTargetPos_rail(glm::vec3(0., 10., 3.), -90.f, 0.f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
+	{
+		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f);
 	}
 
 

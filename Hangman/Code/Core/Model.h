@@ -59,7 +59,7 @@ public:
 	void AttachNewShader (Shader* shader) { m_shader = shader; }
 	void AttachNewTexture(Texture* tex)   { m_tex = tex      ; }
 
-	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
+	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix , bool useOverride = false, Texture* overrideTexture = nullptr);
 
 	//Basic model manipulation
 	void TranslateMatrix(glm::vec3 amount);
