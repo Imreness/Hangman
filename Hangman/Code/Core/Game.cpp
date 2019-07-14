@@ -74,6 +74,7 @@ void Game::Update()
 		m_cam->Mouselook(mouseXPos, mouseYPos);
 		m_cam->UpdateMousePos(mouseXPos, mouseYPos);
 
+		m_audio->Update(m_cam->getPos(), m_cam->getFront());
 
 		btDynamicsWorld* physicsWorld = m_physics->getWorld();
 		//Process State

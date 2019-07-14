@@ -118,6 +118,7 @@ public:
 	glm::mat4& getView()    { return m_view        ;}
 	glm::mat4& getProj()    { return m_proj        ;}
 	glm::vec3& getPos()     { return m_position    ;}
+	glm::vec3& getFront()   { return m_front       ;}
 	float getMouseX_DEBUG() { return m_lastx_DEBUG ;}
 	float getMouseY_DEBUG() { return m_lasty_DEBUG ;}
 	float getMouseX()       { return m_mouseX      ;}

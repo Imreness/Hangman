@@ -29,6 +29,10 @@ void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
 
 	res->SpawnObject("upperbox", "Models/button.blend", "test", physicsWorld , upperboxTransform);
 
+	res->loadSound("Audio/bleep.wav");
+	res->loadMusic("Audio/mainmusic.wav")->setVolume(5.f);
+	res->getMusic("mainmusic.wav")->Play();
+
 	//Physics Debug objects
 	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
 	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
@@ -108,8 +112,9 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 
 
 	//Raycast
-	if (glfwGetMouseButton(window , 0) == GLFW_PRESS)
+	if (glfwGetMouseButton(window , 0) == GLFW_PRESS && !m_mouseClicked)
 	{
+		m_mouseClicked = true;
 		Mouse3DPosition MousePos = cam->getMouse3DPositions(window);
 
 		glm::vec3 startPos = MousePos.StartPos;
@@ -132,11 +137,16 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 			//res->getObject("guide2")->Translate(glm::vec3(rayCallback.m_hitPointWorld[0].x(),
 			//	rayCallback.m_hitPointWorld[0].y(),
 			//	rayCallback.m_hitPointWorld[0].z()));
+
+			res->getSound("bleep.wav")->Play();
 		}
 
 		//res->getObject("guide1")->Translate(startPos, true);
 
 	}
+
+	if (glfwGetMouseButton(window, 0) == GLFW_RELEASE)
+		m_mouseClicked = false;
 }
 
 void DebugState::Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld)

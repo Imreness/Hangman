@@ -6,6 +6,7 @@
 class DebugState : public GameState
 {
 private:
+	bool m_mouseClicked;
 public:
 	virtual void Setup(Resource* res, btDynamicsWorld* physicsWorld);
 

@@ -87,6 +87,12 @@
     <ClCompile Include="Code\Core\Audio.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\SoundEffect.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Music.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h">
@@ -147,6 +153,12 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Audio.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\SoundEffect.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Music.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>

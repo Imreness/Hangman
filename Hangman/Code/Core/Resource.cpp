@@ -103,6 +103,57 @@ Object* Resource::getObject(std::string name)
 	return m_ObjectPool[name];
 }
 
+SoundEffect* Resource::loadSound(const char* path)
+{
+	std::string soundname(path);
+	soundname = soundname.substr(soundname.find_first_of('/') + 1);
+	std::cout << soundname << "\n";
+
+	if (m_SoundPool.find(soundname) == m_SoundPool.end())
+	{
+		SoundEffect* sound = new SoundEffect(path);
+		m_SoundPool[soundname] = sound;
+		return sound;
+	}
+	else
+		return m_SoundPool[soundname];
+}
+
+SoundEffect* Resource::getSound(std::string name)
+{
+	if (m_SoundPool.find(name) == m_SoundPool.end())
+	{
+		std::cout << "ERROR::RESOURCE::GETSOUND - No sound effect named: " << name << " found.\n";
+	}
+	return m_SoundPool[name];
+}
+
+Music* Resource::loadMusic(const char* path)
+{
+	std::string musicname(path);
+	musicname = musicname.substr(musicname.find_first_of('/') + 1);
+	std::cout << musicname << "\n";
+
+	if (m_MusicPool.find(musicname) == m_MusicPool.end())
+	{
+		Music* music = new Music(path);
+		m_MusicPool[musicname] = music;
+		return music;
+	}
+	else
+		return m_MusicPool[musicname];
+}
+
+Music* Resource::getMusic(std::string name)
+{
+	if (m_MusicPool.find(name) == m_MusicPool.end())
+	{
+		std::cout << "ERROR::RESOURCE::GETMUSIC - No music named: " << name << " found.\n";
+	}
+	return m_MusicPool[name];
+}
+
+
 //Render ALL objects in the objectPool
 void Resource::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix)
 {
