@@ -68,8 +68,6 @@ void Game::Update()
 
 		DeltaTime::CalculateDelta();
 
-		std::cout << m_curr_renderTick << " & " << glfwGetTime() << "\n";
-
 		m_physics->Update(m_renderTick);
 
 		//Update Camera and it's values
