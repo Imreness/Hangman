@@ -30,7 +30,6 @@ private:
 
 	//Physics
 	btRigidBody*       m_body;
-	btCollisionObject* m_colObject;
 	btCollisionShape*  m_colShape;
 	btDynamicsWorld*   m_parentWorld;
 public:

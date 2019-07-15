@@ -68,6 +68,8 @@ void Game::Update()
 
 		DeltaTime::CalculateDelta();
 
+		std::cout << m_curr_renderTick << " & " << glfwGetTime() << "\n";
+
 		m_physics->Update(m_renderTick);
 
 		//Update Camera and it's values
@@ -90,6 +92,8 @@ void Game::Update()
 void Game::Close()
 {
 	//Cleanup
+	delete m_state;
+	delete m_audio;
 	delete m_res;
 	delete m_physics;
 }

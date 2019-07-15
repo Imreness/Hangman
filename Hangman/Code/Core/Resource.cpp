@@ -5,7 +5,6 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 	//Format a name from the path
 	std::string modelName(path);
 	modelName = modelName.substr(modelName.find_first_of('/') + 1);
-	std::cout << modelName << "\n";
 
 	//Check if we already have that model loaded
 	if (m_ModelPool.find(modelName) == m_ModelPool.end())
@@ -15,9 +14,18 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 		model->AttachNewTexture(LoadTexture(model->Setup(path, getShader(shaderName)).c_str()));
 		//Save it into the pool
 		m_ModelPool[modelName] = model;
+
+
+		#ifdef _DEBUG
+			std::cout << "Model Loaded into memory: " << modelName << "\n";
+		#endif
+
 		return model;
 	}
 	else
+		#ifdef _DEBUG
+			std::cout << "Model already loaded into memory, reusing it: " << modelName << "\n";
+		#endif
 		//just return the already loaded model
 		return m_ModelPool[modelName];
 }
@@ -37,16 +45,24 @@ Texture* Resource::LoadTexture(const char* path)
 	//Format a name from the path
 	std::string textureName(path);
 	textureName = textureName.substr(textureName.find_first_of('/') + 1);
-	std::cout << textureName << "\n";
 
 	//Check if we already have that texture loaded
 	if (m_TexturePool.find(textureName) == m_TexturePool.end())
 	{
 		Texture* texture           = new Texture(path);
 		m_TexturePool[textureName] = texture;
+
+		#ifdef _DEBUG
+			std::cout << "Texture Loaded into memory: " << textureName << "\n";
+		#endif
+
 		return texture;
 	}
 	else
+		#ifdef _DEBUG
+			std::cout << "Texture already loaded into memory, reusing it: " << textureName << "\n";
+		#endif
+
 		//just return the already loaded texture
 		return m_TexturePool[textureName];
 }
@@ -58,9 +74,17 @@ Shader* Resource::loadShader(const char* vertexPath, const char* fragmentPath, s
 	{
 		Shader* shader     = new Shader(vertexPath , fragmentPath);
 		m_ShaderPool[name] = shader;
+
+		#ifdef _DEBUG
+			std::cout << "Shader Loaded into Memory:" << name << "\n";
+		#endif
+
 		return shader;
 	}
 	else
+		#ifdef _DEBUG
+			std::cout << "Shader already loaded into memory, reusing it:" << name << "\n";
+		#endif
 		//just return the already loaded shader
 		return m_ShaderPool[name];
 }
@@ -82,7 +106,7 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath, const cha
 	{
 		Object* obj;
 		if (textureOverride)
-			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans, true , tex);
+			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans, true, tex);
 		else
 			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans);
 
@@ -91,6 +115,7 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath, const cha
 	}
 	else
 		//just return the already spawned object
+		std::cout << "WARNING::RESOURCE::SPAWNOBJECT - Object named " << name << " has been already spawned, returning the spawned instance\n";
 		return m_ObjectPool[name];
 }
 //Get an ALREADY SPAWNED OBJECT
@@ -107,15 +132,22 @@ SoundEffect* Resource::loadSound(const char* path)
 {
 	std::string soundname(path);
 	soundname = soundname.substr(soundname.find_first_of('/') + 1);
-	std::cout << soundname << "\n";
 
 	if (m_SoundPool.find(soundname) == m_SoundPool.end())
 	{
 		SoundEffect* sound = new SoundEffect(path);
 		m_SoundPool[soundname] = sound;
+
+		#ifdef _DEBUG
+			std::cout << "SoundEffect Loaded into memory:" << soundname << "\n";
+		#endif
+
 		return sound;
 	}
 	else
+		#ifdef _DEBUG
+			std::cout << "SoundEffect already loaded into memory, reusing it:" << soundname << "\n";
+		#endif
 		return m_SoundPool[soundname];
 }
 
@@ -132,15 +164,22 @@ Music* Resource::loadMusic(const char* path)
 {
 	std::string musicname(path);
 	musicname = musicname.substr(musicname.find_first_of('/') + 1);
-	std::cout << musicname << "\n";
 
 	if (m_MusicPool.find(musicname) == m_MusicPool.end())
 	{
 		Music* music = new Music(path);
 		m_MusicPool[musicname] = music;
+
+		#ifdef _DEBUG
+			std::cout << "Music Loaded into memory:" << musicname << "\n";
+		#endif
+
 		return music;
 	}
 	else
+		#ifdef _DEBUG
+			std::cout << "Music already loaded into memory, reusing it:" << musicname << "\n";
+		#endif
 		return m_MusicPool[musicname];
 }
 
@@ -165,6 +204,18 @@ void Resource::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix)
 
 void Resource::Clean()
 {
+	for (auto x : m_MusicPool)
+	{
+		delete x.second;
+	}
+	m_MusicPool.clear();
+
+	for (auto x : m_SoundPool)
+	{
+		delete x.second;
+	}
+	m_SoundPool.clear();
+
 	for (auto x : m_ObjectPool)
 	{
 		delete x.second;

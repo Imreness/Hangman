@@ -8,6 +8,11 @@ Music::Music(const char* path)
 	m_music.setLoop(true);
 }
 
+Music::~Music()
+{
+	m_music.stop();
+}
+
 void Music::Play()
 {
 	m_music.play();

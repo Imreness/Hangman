@@ -7,8 +7,11 @@ SoundEffect::SoundEffect(const char* path)
 		std::cout << "ERROR::AUDIO::SOUNDEFFECT::FAILED_TO_LOAD_FILE\n @ " << path << "\n";
 
 	m_sound.setBuffer(m_buffer);
+}
 
-
+SoundEffect::~SoundEffect()
+{
+	m_sound.stop();
 }
 
 void SoundEffect::Play()

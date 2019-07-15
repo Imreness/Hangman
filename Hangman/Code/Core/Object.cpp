@@ -70,6 +70,8 @@ void Object::Scale(glm::vec3 amount , bool resetLastscale)
 Object::~Object()
 {
 	m_parentWorld->removeRigidBody(m_body);
+	delete m_body;
+	delete m_colShape;
 }
 
 Object::Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverdrive, Texture* tex)

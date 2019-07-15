@@ -11,6 +11,7 @@ private:
 
 public:
 	SoundEffect(const char* path);
+	~SoundEffect();
 
 	void Play();
 	void Stop();

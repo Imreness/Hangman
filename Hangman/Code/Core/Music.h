@@ -9,6 +9,7 @@ private:
 	sf::Music m_music;
 public:
 	Music(const char* path);
+	~Music();
 
 	void Play();
 	void Stop();
