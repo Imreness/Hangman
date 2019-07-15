@@ -31,7 +31,7 @@ private:
 
 public:
 	//Setup the GLFW window, check all the libaries
-	Game(const int windowX, const int windowY, const char* title);
+	Game(const int windowX, const int windowY, const char* title , GLFWimage* icon);
 
 	void Update();
 

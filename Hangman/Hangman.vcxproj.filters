@@ -31,6 +31,12 @@
     <Filter Include="Source Files\GameStates">
       <UniqueIdentifier>{3292df21-3413-48c8-be43-0989fd9200f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sidesystems">
+      <UniqueIdentifier>{cfd441ad-d3b5-480c-a77c-d4f9ba9e8dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sidesystems">
+      <UniqueIdentifier>{14ab95c7-c4c0-4aba-a0e2-07c13c36aace}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="Code\Core\Music.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Sidesystems\IconLoader.cpp">
+      <Filter>Source Files\Sidesystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="Code\Core\Music.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Sidesystems\IconLoader.h">
+      <Filter>Header Files\Sidesystems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

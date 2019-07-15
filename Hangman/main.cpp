@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Code/Core/Game.h"
+#include "Code/Sidesystems/IconLoader.h"
 
 /*.....................................................................
  *                        H A N G M A N - 2019
@@ -13,7 +14,9 @@
 
 int main()
 {
-	Game hangman(600, 400 ,  "Hangman");
+	GLFWimage* icon = IconLoader::LoadIcon("icon.png");
+
+	Game hangman(1280, 720 ,  "Hangman" , icon);
 
 	while (!hangman.gameShouldClose())
 	{

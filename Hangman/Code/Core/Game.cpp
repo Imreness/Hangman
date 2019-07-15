@@ -4,7 +4,7 @@
 double mouseXPos = 0, mouseYPos = 0;
 
 
-Game::Game(const int windowX, const int windowY, const char* title)
+Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* icon)
 	: m_winX(windowX) , m_winY(windowY)
 {
 	//Init GLFW
@@ -16,6 +16,8 @@ Game::Game(const int windowX, const int windowY, const char* title)
 
 	//Create window then check it
 	m_window = glfwCreateWindow(m_winX, m_winY, title, NULL, NULL);
+
+	glfwSetWindowIcon(m_window, 1, icon);
 
 	if (!m_window)
 	{

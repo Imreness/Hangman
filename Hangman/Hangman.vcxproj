@@ -31,6 +31,7 @@
     <ClCompile Include="Code\Core\SoundEffect.cpp" />
     <ClCompile Include="Code\Core\Texture.cpp" />
     <ClCompile Include="Code\GameStates\DebugState.cpp" />
+    <ClCompile Include="Code\Sidesystems\IconLoader.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_demo.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_draw.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Code\Core\SoundEffect.h" />
     <ClInclude Include="Code\Core\Texture.h" />
     <ClInclude Include="Code\GameStates\DebugState.h" />
+    <ClInclude Include="Code\Sidesystems\IconLoader.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui_impl_glfw.h" />
