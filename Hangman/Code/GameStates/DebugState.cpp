@@ -10,44 +10,30 @@ void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
 
+	res->LoadTexture("Textures/windmillAtlas.png");
 
-	//btTransform box1Trans;
-	//box1Trans.setIdentity();
-	//res->SpawnObject("homo", "Models/cube.blend", "test", physicsWorld, box1Trans);
 
-	res->LoadTexture("Textures/button_oldman.png");
+	btTransform lowerButtonTrans; lowerButtonTrans.setIdentity();
+	res->SpawnObject("lowerButton", "Models/button.blend", "test", physicsWorld, lowerButtonTrans);
 
-	res->SpawnObject("mainbox", "Models/button.blend", "test", physicsWorld, btTransform::getIdentity());
-
-	btTransform sideboxTransform; sideboxTransform.setIdentity();
-	sideboxTransform.setOrigin(btVector3(0. , 5. , 0.));
-	res->SpawnObject("sidebox", "Models/button.blend", "test", physicsWorld, sideboxTransform,
-						true, res->getTexture("button_oldman.png"));
-
-	btTransform upperboxTransform; upperboxTransform.setIdentity();
-	upperboxTransform.setOrigin(btVector3(0., 10., 0.));
-
-	res->SpawnObject("upperbox", "Models/button.blend", "test", physicsWorld , upperboxTransform);
-
-	res->loadSound("Audio/bleep.wav");
-	res->loadMusic("Audio/mainmusic.wav")->setVolume(5.f);
-	res->getMusic("mainmusic.wav")->Play();
-
-	//Physics Debug objects
-	//res->SpawnObject("guide1", "Models/asd.blend", "test", physicsWorld);
-	//res->SpawnObject("guide2", "Models/asd.blend", "test", physicsWorld);
+	btTransform upperButtonTrans; upperButtonTrans.setIdentity();
+	upperButtonTrans.setOrigin(btVector3(5., 0., 0.));
+	res->SpawnObject("upperButton", "Models/button.blend", "test", physicsWorld, upperButtonTrans, true , res->getTexture("windmillAtlas.png"));
 }
 
 
-void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWorld* physicsWorld, Resource* res, float delta)
+void DebugState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld* physicsWorld, Resource* res, float delta)
 {
 	if (glfwGetKey(window, GLFW_KEY_F9) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
 	}
+
+	//Camera Input
+	{
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		cam->Move_DEBUG(CameraMovement_DEBUG::FORWARDS , delta);
+		cam->Move_DEBUG(CameraMovement_DEBUG::FORWARDS, delta);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
@@ -96,17 +82,15 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 		cam->SetMode(CameraMode::DEBUG);
 	}
 
+	}
+
 	if (glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS)
 	{
-		cam->SetTargetPos_rail(glm::vec3(0., 5., 3.), -90.f, 0.f);
-	}
-	if (glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS)
-	{
-		cam->SetTargetPos_rail(glm::vec3(0., 10., 3.), -90.f, 0.f);
-	}
-	if (glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS)
-	{
 		cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90.f, 0.f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_6) == GLFW_PRESS)
+	{
+		cam->SetTargetPos_rail(glm::vec3(5., 0., 3.), -90.f, 0.f);
 	}
 
 
@@ -138,7 +122,6 @@ void DebugState::ProcessKeyboard(GLFWwindow* window , Camera* cam, btDynamicsWor
 			//	rayCallback.m_hitPointWorld[0].y(),
 			//	rayCallback.m_hitPointWorld[0].z()));
 
-			res->getSound("bleep.wav")->Play();
 		}
 
 		//res->getObject("guide1")->Translate(startPos, true);

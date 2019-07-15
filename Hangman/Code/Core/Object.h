@@ -19,6 +19,8 @@ private:
 
 	std::string m_name;
 
+	bool m_shouldRender = true;
+
 	//3D space
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
@@ -38,6 +40,8 @@ public:
 	Object(std::string name, Model* model, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverdrive = false, Texture* tex = nullptr);
 
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
+
+	void setShouldRender(bool value) { m_shouldRender = value; }
 
 	//Object Manipulation
 	void Translate(glm::vec3 amount , bool resetLastpos = false);

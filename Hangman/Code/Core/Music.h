@@ -13,7 +13,7 @@ public:
 
 	void Play();
 	void Stop();
-	//100 - full volume , 0 - silent
+	//100 = full volume , 0 = silent
 	void setVolume(float amount);
 };
 
