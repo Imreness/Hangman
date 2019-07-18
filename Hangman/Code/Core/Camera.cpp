@@ -76,6 +76,19 @@ void Camera::SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch, float inte
 	m_interpolationSpeed = interpolationSpeed;
 }
 
+void Camera::SetTransform(glm::vec3 pos, float yaw, float pitch)
+{
+	m_interpolationDone = false;
+	m_interpolationTimer = 0.;
+
+	m_position = pos;
+	m_targetPos = pos;
+	m_yaw_rail = yaw;
+	m_targetYaw = yaw;
+	m_pitch_rail = pitch;
+	m_targetPitch = pitch;
+}
+
 Mouse3DPosition Camera::getMouse3DPositions(GLFWwindow* window)
 {
 	int windowWidth, windowHeight;

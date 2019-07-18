@@ -8,9 +8,9 @@ class DebugState : public GameState
 private:
 	bool m_mouseClicked;
 public:
-	virtual void Setup(Resource* res, btDynamicsWorld* physicsWorld);
+	virtual void Setup(Resource* res, Camera* cam,  btDynamicsWorld* physicsWorld);
 
-	void Update(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld, float delta);
+	virtual STATECHANGE Update(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld, float delta);
 
 	virtual void Render(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld);
 

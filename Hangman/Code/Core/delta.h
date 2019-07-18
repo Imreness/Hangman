@@ -15,6 +15,11 @@ namespace DeltaTime
 		deltaTime    = currentFrame - lastFrame;
 		lastFrame    = currentFrame;
 	}
+
+	void Init()
+	{
+		lastFrame = glfwGetTime();
+	}
 }
 
 #endif

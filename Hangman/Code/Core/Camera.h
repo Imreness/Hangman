@@ -89,7 +89,7 @@ private:
 public:
 
 	Camera(int screenWidth , int screenHeight ,  glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), float mouseSens = 0.25f)
-		: m_position(position), m_up(glm::vec3(0.0f, 1.0f, 0.0f)), m_lookSens_DEBUG(mouseSens)
+		: m_position(position), m_targetPos(position), m_up(glm::vec3(0.0f, 1.0f, 0.0f)), m_lookSens_DEBUG(mouseSens)
 	{
 
 		//Set all the default values
@@ -107,9 +107,8 @@ public:
 
 	//Change between debug and On-rails cam
 	void SetMode(CameraMode newmode);
-
-
 	void SetTargetPos_rail(glm::vec3 pos, float yaw, float pitch , float interpolationSpeed = 1);
+	void SetTransform(glm::vec3 pos , float yaw , float pitch);
 
 	//Get the Cursor's 3D place in space and direction
 	Mouse3DPosition getMouse3DPositions(GLFWwindow* window);

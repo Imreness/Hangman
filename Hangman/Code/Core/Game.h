@@ -6,8 +6,9 @@
 #include "Physics.h"
 #include "Audio.h"
 
-//Default gamestate
+//gamestates
 #include "..//GameStates/DebugState.h"
+#include "..//GameStates/IntroState.h"
 
 //A master-system handler
 class Game
@@ -34,6 +35,8 @@ public:
 	Game(const int windowX, const int windowY, const char* title , GLFWimage* icon);
 
 	void Update();
+
+	void ChangeState(STATECHANGE changeTo);
 
 	bool gameShouldClose() { return glfwWindowShouldClose(m_window); }
 

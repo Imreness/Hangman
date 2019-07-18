@@ -14,9 +14,9 @@
 
 int main()
 {
-	GLFWimage* icon = IconLoader::LoadIcon("icon.png");
+	GLFWimage* icon = IconLoader::LoadIcon("Textures/icon.png");
 
-	Game hangman(1280, 720 ,  "Hangman" , icon);
+	Game hangman(1280, 720 ,  "Hangman - A game made by Imre Barta" , icon);
 
 	while (!hangman.gameShouldClose())
 	{

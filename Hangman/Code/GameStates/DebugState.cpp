@@ -1,17 +1,23 @@
 #include "DebugState.h"
 
-void DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld , float delta)
+STATECHANGE DebugState::Update(Resource* res , Camera* cam, btDynamicsWorld* physicsWorld , float delta)
 {
 	cam->Update(delta);
+	return STATECHANGE::NONE;
 }
 
 
-void DebugState::Setup(Resource* res, btDynamicsWorld* physicsWorld)
+void DebugState::Setup(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld)
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "test");
 
 	res->LoadTexture("Textures/windmillAtlas.png");
 
+	Music* bigboy = res->loadMusic("Audio/mainmusic.wav");
+	bigboy->setVolume(5.f);
+	bigboy->Play();
+
+	res->loadSound("Audio/bleep.wav");
 
 	btTransform lowerButtonTrans; lowerButtonTrans.setIdentity();
 	res->SpawnObject("lowerButton", "Models/button.blend", "test", physicsWorld, lowerButtonTrans);
@@ -93,6 +99,15 @@ void DebugState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorl
 		cam->SetTargetPos_rail(glm::vec3(5., 0., 3.), -90.f, 0.f);
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_KP_1) == GLFW_PRESS)
+	{
+		res->getObject("upperButton")->setShouldRender(false);
+	}
+	if (glfwGetKey(window, GLFW_KEY_KP_3) == GLFW_PRESS)
+	{
+		res->getObject("upperButton")->setShouldRender(true);
+	}
+
 
 
 	//Raycast
@@ -117,7 +132,10 @@ void DebugState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorl
 
 		if (rayCallback.hasHit())
 		{
-			std::cout << ((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() << "\n";;
+			std::cout << ((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() << "\n";
+
+			res->getSound("bleep.wav")->Play();
+
 			//res->getObject("guide2")->Translate(glm::vec3(rayCallback.m_hitPointWorld[0].x(),
 			//	rayCallback.m_hitPointWorld[0].y(),
 			//	rayCallback.m_hitPointWorld[0].z()));

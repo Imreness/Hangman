@@ -102,6 +102,9 @@
     <ClCompile Include="Code\Sidesystems\IconLoader.cpp">
       <Filter>Source Files\Sidesystems</Filter>
     </ClCompile>
+    <ClCompile Include="Code\GameStates\IntroState.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h">
@@ -173,6 +176,9 @@
     <ClInclude Include="Code\Sidesystems\IconLoader.h">
       <Filter>Header Files\Sidesystems</Filter>
     </ClInclude>
+    <ClInclude Include="Code\GameStates\IntroState.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\object.frag">
@@ -181,5 +187,10 @@
     <None Include="Shaders\object.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

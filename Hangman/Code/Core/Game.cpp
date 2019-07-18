@@ -48,11 +48,16 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 	m_res     = new Resource();
 	m_audio   = new AudioEngine();
 
-	//Setup the default game state
-	m_state = new DebugState();
-	m_state->Setup(m_res, m_physics->getWorld());
+	m_cam = new Camera(windowX, windowY, glm::vec3(0., 0., 0.));
 
-	m_cam = new Camera(windowX, windowY , glm::vec3(0. , 0. , 4.));
+	//Setup the default game state
+	m_state = new IntroState();
+	m_state->Setup(m_res,m_cam, m_physics->getWorld());
+
+
+
+	DeltaTime::Init();
+	m_curr_renderTick = glfwGetTime();
 }
 
 void Game::Update()
@@ -80,13 +85,42 @@ void Game::Update()
 
 		btDynamicsWorld* physicsWorld = m_physics->getWorld();
 		//Process State
-		m_state->Update(m_res , m_cam , physicsWorld, DeltaTime::deltaTime);
+		STATECHANGE newstate = m_state->Update(m_res, m_cam, physicsWorld, DeltaTime::deltaTime);
+
 		m_state->ProcessKeyboard(m_window , m_cam, physicsWorld,m_res, DeltaTime::deltaTime);
 		m_state->Render(m_res , m_cam , physicsWorld);
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
+
+
+		if (newstate != STATECHANGE::NONE)
+		{
+			ChangeState(newstate);
+		}
 	}
+}
+
+void Game::ChangeState(STATECHANGE changeTo)
+{
+	delete m_res;
+	m_res = new Resource();
+
+	delete m_state;
+	switch (changeTo)
+	{
+	case STATECHANGE::NONE:
+		std::cout << "ERROR::STATECHANGE::CHANGESTATE_CALLED_WITH_NONE_STATE\n";
+		break;
+	case STATECHANGE::MAINMENU:
+		//m_state = new MenuState();
+		break;
+	default:
+		std::cout << "ERROR::STATECHANGE::CHANGESTATE_CALLED_WITH_UNKNOWN_STATE\n";
+		break;
+	}
+
+	m_state->Setup(m_res, m_cam, m_physics->getWorld());
 }
 
 void Game::Close()

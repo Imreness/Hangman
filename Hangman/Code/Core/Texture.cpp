@@ -8,7 +8,7 @@ Texture::Texture(const char* path)
 
 	int width = 0, height = 0, nrComponent = 0;
 
-	unsigned char* data = stbi_load(path, &width, &height, &nrComponent, 0);
+	unsigned char* data = stbi_load(path, &width, &height, &nrComponent, STBI_rgb_alpha);
 	if (data)
 	{
 		GLenum format;
@@ -20,7 +20,7 @@ Texture::Texture(const char* path)
 			format = GL_RGBA;
 
 		glBindTexture(GL_TEXTURE_2D, m_ID);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 
