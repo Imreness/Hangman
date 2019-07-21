@@ -3,7 +3,6 @@
 #define INTRO_GAMESTATE_CLASS
 #include "..//Core/GameState.h"
 
-
 class IntroState : public GameState
 {
 private:
@@ -21,7 +20,7 @@ private:
 public:
 	virtual ~IntroState() {}
 
-	virtual void Setup(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld);
+	virtual void Setup(GLFWwindow* window ,Resource* res, Camera* cam, btDynamicsWorld* physicsWorld);
 
 	virtual STATECHANGE Update(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld, float delta);
 

@@ -38,7 +38,7 @@ Texture::Texture(const char* path)
 	}
 	else
 	{
-		std::cout << "ERROR::STBI::LOAD - FAILED TO LOAD FILE AT:\n" << path << "\n";
+		std::cout << "ERROR::STBI::LOAD - FAILED TO LOAD FILE AT: " << path << "\n";
 	}
 }
 

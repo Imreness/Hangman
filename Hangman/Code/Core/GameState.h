@@ -20,7 +20,7 @@ public:
 
 	virtual ~GameState() {}
 	
-	virtual void Setup(Resource* res, Camera* cam ,btDynamicsWorld* physicsWorld) { std::cout << "WARNING::GAMESTATE::SETUP METHOD NOT IMPLEMENTED\n"; }
+	virtual void Setup(GLFWwindow* window,Resource* res, Camera* cam ,btDynamicsWorld* physicsWorld) { std::cout << "WARNING::GAMESTATE::SETUP METHOD NOT IMPLEMENTED\n"; }
 
 	virtual STATECHANGE Update(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld, float delta) { std::cout << "WARNING::GAMESTATE::UPDATE METHOD NOT IMPLEMENTED\n"; return STATECHANGE::NONE; }
 

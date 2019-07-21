@@ -35,6 +35,9 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 
 	//Make depth testing enabled, enabling us to do 3D
 	glEnable(GL_DEPTH_TEST);
+	//TODO
+	//do all enables in one enable call
+	glEnable(GL_BLEND);
 
 	//Set other values
 	glViewport(0, 0, m_winX, m_winY);
@@ -52,7 +55,7 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 
 	//Setup the default game state
 	m_state = new IntroState();
-	m_state->Setup(m_res,m_cam, m_physics->getWorld());
+	m_state->Setup(m_window,m_res,m_cam, m_physics->getWorld());
 
 
 
@@ -107,20 +110,20 @@ void Game::ChangeState(STATECHANGE changeTo)
 	m_res = new Resource();
 
 	delete m_state;
+
+	std::cout << "\n\n CHANGING STATES \n\n";
+
 	switch (changeTo)
 	{
-	case STATECHANGE::NONE:
-		std::cout << "ERROR::STATECHANGE::CHANGESTATE_CALLED_WITH_NONE_STATE\n";
-		break;
 	case STATECHANGE::MAINMENU:
-		//m_state = new MenuState();
+		m_state = new MenuState();
 		break;
 	default:
 		std::cout << "ERROR::STATECHANGE::CHANGESTATE_CALLED_WITH_UNKNOWN_STATE\n";
 		break;
 	}
 
-	m_state->Setup(m_res, m_cam, m_physics->getWorld());
+	m_state->Setup(m_window, m_res, m_cam, m_physics->getWorld());
 }
 
 void Game::Close()

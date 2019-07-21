@@ -151,8 +151,7 @@ public:
 			glfwSetInputMode(win, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
-
-	//While the window cant change, options will enable us to do so
+	//CAll this when resizing a window
 	void RecalculateProjection(int width, int height)
 	{
 		m_proj = glm::perspective(m_FOV, (float)width / height, 0.01f, 100.0f);

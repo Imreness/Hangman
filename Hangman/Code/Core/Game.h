@@ -9,6 +9,7 @@
 //gamestates
 #include "..//GameStates/DebugState.h"
 #include "..//GameStates/IntroState.h"
+#include "..//GameStates/MenuState.h"
 
 //A master-system handler
 class Game

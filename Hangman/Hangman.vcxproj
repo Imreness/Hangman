@@ -32,6 +32,7 @@
     <ClCompile Include="Code\Core\Texture.cpp" />
     <ClCompile Include="Code\GameStates\DebugState.cpp" />
     <ClCompile Include="Code\GameStates\IntroState.cpp" />
+    <ClCompile Include="Code\GameStates\MenuState.cpp" />
     <ClCompile Include="Code\Sidesystems\IconLoader.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_demo.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="Code\Core\Texture.h" />
     <ClInclude Include="Code\GameStates\DebugState.h" />
     <ClInclude Include="Code\GameStates\IntroState.h" />
+    <ClInclude Include="Code\GameStates\MenuState.h" />
     <ClInclude Include="Code\Sidesystems\IconLoader.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui.h" />

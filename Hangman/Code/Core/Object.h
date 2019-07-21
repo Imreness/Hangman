@@ -52,6 +52,7 @@ public:
 
 	void AttachNewShader(Shader* shader)    { m_model->AttachNewShader(shader);   }
 	void AttachNewTexture(Texture* texture) { m_model->AttachNewTexture(texture); }
+	void AttachNewOverrideTexture(Texture* texture) { m_boolOverrideTexture = true; m_overrideTexture = texture; }
 
 };
 
