@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Code/Core/Game.h"
 #include "Code/Sidesystems/IconLoader.h"
+#include "Code/Sidesystems/configloader.h"
 
 /*.....................................................................
  *                        H A N G M A N - 2019
@@ -16,7 +17,9 @@ int main()
 {
 	GLFWimage* icon = IconLoader::LoadIcon("Textures/icon.png");
 
-	Game hangman(896, 504 ,  "Hangman - A game made by Imre Barta" , icon);
+	Config config = ConfigLoader::loadConfig();
+
+	Game hangman(config.screenWidth, config.screenHeight ,  "Hangman - A game made by Imre Barta" , icon);
 
 	while (!hangman.gameShouldClose())
 	{

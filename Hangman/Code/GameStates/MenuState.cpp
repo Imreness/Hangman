@@ -199,16 +199,19 @@ void MenuState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld
 					glfwSetWindowSize(window, 896, 504);
 					glViewport(0, 0, 896, 504);
 					cam->RecalculateProjection(896, 504);
+					ConfigLoader::SaveConfig("low");
 					break;
 				case RESOLUTION::MIDRES:
 					glfwSetWindowSize(window, 1280, 720);
 					glViewport(0, 0, 1280, 720);
 					cam->RecalculateProjection(1280, 720);
+					ConfigLoader::SaveConfig("mid");
 					break;
 				case RESOLUTION::HIGHRES:
 					glfwSetWindowSize(window, 1536, 864);
 					glViewport(0, 0, 1536, 864);
 					cam->RecalculateProjection(1536, 864);
+					ConfigLoader::SaveConfig("high");
 					break;
 				default:
 					break;

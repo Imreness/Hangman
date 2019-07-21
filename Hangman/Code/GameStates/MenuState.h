@@ -2,6 +2,7 @@
 #ifndef MENUSTATE_CLASS
 #define MENUSTATE_CLASS
 #include "..//Core/GameState.h"
+#include "..//Sidesystems/configloader.h"
 
 enum class RESOLUTION
 {
