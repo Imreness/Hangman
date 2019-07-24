@@ -89,7 +89,10 @@ STATECHANGE MenuState::Update(Resource* res, Camera* cam, btDynamicsWorld* physi
 {
 	cam->Update(delta);
 
-	return STATECHANGE::NONE;
+	if (m_switchToPlay)
+		return STATECHANGE::PLAY;
+	else
+		return STATECHANGE::NONE;
 }
 
 void MenuState::Render(Resource* res, Camera* cam, btDynamicsWorld* physicsWorld)
@@ -135,6 +138,11 @@ void MenuState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld
 			{
 				res->getSound("click.wav")->Play();
 				glfwSetWindowShouldClose(window, true);
+			}
+			else if (((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() == "b_startGame")
+			{
+				res->getSound("click.wav")->Play();
+				m_switchToPlay = true;
 			}
 			else if (((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() == "b_options")
 			{

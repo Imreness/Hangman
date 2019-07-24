@@ -10,7 +10,8 @@
 enum class STATECHANGE
 {
 	NONE,
-	MAINMENU
+	MAINMENU,
+	PLAY
 };
 
 //A base for all other Gamestates to inherit from

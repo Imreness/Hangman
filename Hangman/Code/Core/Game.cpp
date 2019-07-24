@@ -54,7 +54,7 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 	m_cam = new Camera(windowX, windowY, glm::vec3(0., 0., 0.));
 
 	//Setup the default game state
-	m_state = new IntroState();
+	m_state = new PlayState();
 	m_state->Setup(m_window,m_res,m_cam, m_physics->getWorld());
 
 
@@ -117,6 +117,9 @@ void Game::ChangeState(STATECHANGE changeTo)
 	{
 	case STATECHANGE::MAINMENU:
 		m_state = new MenuState();
+		break;
+	case STATECHANGE::PLAY:
+		m_state = new PlayState();
 		break;
 	default:
 		std::cout << "ERROR::STATECHANGE::CHANGESTATE_CALLED_WITH_UNKNOWN_STATE\n";

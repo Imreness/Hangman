@@ -110,6 +110,7 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath, const cha
 		else
 			obj = new Object(name, getModel(modelPath, shaderName), physicsWorld, trans);
 
+
 		m_ObjectPool[name] = obj;
 		return obj;
 	}
