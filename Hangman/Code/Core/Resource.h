@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "SoundEffect.h"
 #include "Music.h"
+#include "..//Sidesystems/dictionary.h"
 
 #include <bullet/btBulletDynamicsCommon.h>
 
@@ -14,6 +15,8 @@
 class Resource
 {
 private:
+	Dictionary* m_dictionary;
+
 	//Higher-level pools
 	std::unordered_map<std::string, Object* > m_ObjectPool ;
 
@@ -30,7 +33,10 @@ private:
 	//Clean all pools
 	void Clean();
 public:
-	Resource() {}
+	Resource() { m_dictionary = new Dictionary(); }
+
+	void LoadDictionary(const char* path);
+	Dictionary* getDictionary() { return m_dictionary; };
 
 	Texture* getTexture(std::string name);
 	Texture* LoadTexture(const char* path);
@@ -49,7 +55,7 @@ public:
 	Music* loadMusic(const char* path);
 	Music* getMusic(std::string name);
 
-	~Resource() { Clean(); }
+	~Resource() { Clean(); delete m_dictionary; }
 };
 
 #endif 

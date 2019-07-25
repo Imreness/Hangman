@@ -30,6 +30,11 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 		return m_ModelPool[modelName];
 }
 
+void Resource::LoadDictionary(const char* path)
+{
+	m_dictionary->LoadNewDictionary(path);
+}
+
 //With the name, give it the extension(.jpg, .png, etc.)
 Texture* Resource::getTexture(std::string name)
 {

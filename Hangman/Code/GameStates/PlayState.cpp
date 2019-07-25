@@ -5,8 +5,10 @@ void PlayState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "basicShader");
 
 	btTransform objectTrans; objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(0, 0., 0.));
+	objectTrans.setRotation(btQuaternion(0.5 , 0. , 0.));
 	res->loadSound("Audio/click.wav");
 
+	//Spawn in the letters
 	for (int i = 0; i < 26; i++)
 	{
 		//Get Texture
@@ -15,13 +17,12 @@ void PlayState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 		Texture* letter = res->LoadTexture(filepath.c_str());
 
 		//Figure out position
-
 		//Positioning parameters
-		float spacing = 0.3;
+		float spacing = 0.4; 
 		float heightStart = 1.25;
 		float heightDifference = 0.4;
-		float sidewaysStart = -2.5;
-		float sidewaysDifference = -1.6;
+		float sidewaysStart = -2.7;
+		float sidewaysDifference = -2.2;
 		float lastRowOffset = 0.35;
 
 		float buttonScale = 0.125;
@@ -45,6 +46,8 @@ void PlayState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 		res->SpawnObject(objectName.c_str(), "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, letter)
 			->Scale(glm::vec3(buttonScale, buttonScale, buttonScale));
 	}
+
+	res->LoadDictionary("default.wordlist");
 
 	cam->SetTransform(glm::vec3(0., 0., 3.), -90., 0.);
 }
@@ -76,11 +79,45 @@ void PlayState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
-		m_changeToMenu = true;
+		//m_changeToMenu = true;
+		std::cout << res->getDictionary()->getRandomWord() <<"\n";
 	}
 
 	if (glfwGetMouseButton(window, 0) == GLFW_RELEASE)
 		m_mouseClicked = false;
+
+	if (glfwGetMouseButton(window, 0) == GLFW_PRESS && !m_mouseClicked)
+	{
+		m_mouseClicked = true;
+		Mouse3DPosition MousePos = cam->getMouse3DPositions(window);
+
+		glm::vec3 startPos = MousePos.StartPos;
+		glm::vec3 endPos = startPos + MousePos.Direction * 100.f;
+
+		btCollisionWorld::AllHitsRayResultCallback rayCallback(
+			btVector3(startPos.x, startPos.y, startPos.z),
+			btVector3(endPos.x, endPos.y, endPos.z)
+		);
+
+		physicsWorld->rayTest(
+			btVector3(startPos.x, startPos.y, startPos.z),
+			btVector3(endPos.x, endPos.y, endPos.z),
+			rayCallback
+		);
+
+		if (rayCallback.hasHit())
+		{
+			//Check if the button is one of the letters
+			for (int i = 0; i < 26; i++)
+			{
+				std::string name(1, (char)i+97);
+				if (((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() == name)
+				{
+					std::cout << "hit " << (char)(i + 97) << "\n";
+				}
+			}
+		}
+	}
 
 	//Camera Input
 	{

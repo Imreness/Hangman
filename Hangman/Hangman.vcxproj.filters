@@ -114,6 +114,9 @@
     <ClCompile Include="Code\GameStates\PlayState.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Sidesystems\dictionary.cpp">
+      <Filter>Source Files\Sidesystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="Code\GameStates\PlayState.h">
       <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Sidesystems\dictionary.h">
+      <Filter>Header Files\Sidesystems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

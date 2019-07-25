@@ -3,6 +3,7 @@
 #define PLAYSTATE_CLASS
 #include "..//Core/GameState.h"
 #include <string>
+#include <vector>
 
 
 class PlayState : public GameState
@@ -12,6 +13,10 @@ private:
 	bool m_mouseClicked = false;
 
 	bool m_changeToMenu = false;
+
+
+	//Session Specific
+	int m_lives = 10;
 
 public:
 

@@ -35,6 +35,7 @@
     <ClCompile Include="Code\GameStates\MenuState.cpp" />
     <ClCompile Include="Code\GameStates\PlayState.cpp" />
     <ClCompile Include="Code\Sidesystems\configloader.cpp" />
+    <ClCompile Include="Code\Sidesystems\dictionary.cpp" />
     <ClCompile Include="Code\Sidesystems\IconLoader.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui.cpp" />
     <ClCompile Include="D:\Dev\libaries\include\Imgui\imgui_demo.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="Code\GameStates\MenuState.h" />
     <ClInclude Include="Code\GameStates\PlayState.h" />
     <ClInclude Include="Code\Sidesystems\configloader.h" />
+    <ClInclude Include="Code\Sidesystems\dictionary.h" />
     <ClInclude Include="Code\Sidesystems\IconLoader.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imconfig.h" />
     <ClInclude Include="D:\Dev\libaries\include\Imgui\imgui.h" />
