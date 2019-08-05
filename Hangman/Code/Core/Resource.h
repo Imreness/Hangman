@@ -30,9 +30,9 @@ private:
 
 	Model*   getModel  (const char* path , const char* shaderName);
 
-	//Clean all pools
-	void Clean();
 public:
+	bool m_dictionaryUseCustomWords = false;
+
 	Resource() { m_dictionary = new Dictionary(); }
 
 	void LoadDictionary(const char* path);
@@ -44,6 +44,7 @@ public:
 	void Render(glm::mat4 &viewMatrix, glm::mat4 &projMatrix);
 
 	Object* SpawnObject(std::string name, const char* modelPath, const char* shaderName, btDynamicsWorld* physicsWorld, btTransform trans, bool textureOverride = false , Texture* tex = nullptr);
+	void DespawnObject(std::string name);
 	Object* getObject  (std::string name);
 
 	Shader* loadShader(const char* vertexPath, const char* fragmentPath, std::string name);
@@ -54,6 +55,9 @@ public:
 
 	Music* loadMusic(const char* path);
 	Music* getMusic(std::string name);
+
+	//Clean all pools
+	void Clean();
 
 	~Resource() { Clean(); delete m_dictionary; }
 };

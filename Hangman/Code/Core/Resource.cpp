@@ -4,7 +4,7 @@ Model* Resource::getModel(const char* path , const char* shaderName)
 {
 	//Format a name from the path
 	std::string modelName(path);
-	modelName = modelName.substr(modelName.find_first_of('/') + 1);
+	modelName = modelName.substr(modelName.find_last_of('/') + 1);
 
 	//Check if we already have that model loaded
 	if (m_ModelPool.find(modelName) == m_ModelPool.end())
@@ -49,7 +49,7 @@ Texture* Resource::LoadTexture(const char* path)
 {
 	//Format a name from the path
 	std::string textureName(path);
-	textureName = textureName.substr(textureName.find_first_of('/') + 1);
+	textureName = textureName.substr(textureName.find_last_of('/') + 1);
 
 	//Check if we already have that texture loaded
 	if (m_TexturePool.find(textureName) == m_TexturePool.end())
@@ -124,6 +124,11 @@ Object* Resource::SpawnObject(std::string name, const char* modelPath, const cha
 		std::cout << "WARNING::RESOURCE::SPAWNOBJECT - Object named " << name << " has been already spawned, returning the spawned instance\n";
 		return m_ObjectPool[name];
 }
+void Resource::DespawnObject(std::string name)
+{
+	delete m_ObjectPool[name];
+	m_ObjectPool.erase(name);
+}
 //Get an ALREADY SPAWNED OBJECT
 Object* Resource::getObject(std::string name)
 {
@@ -137,7 +142,7 @@ Object* Resource::getObject(std::string name)
 SoundEffect* Resource::loadSound(const char* path)
 {
 	std::string soundname(path);
-	soundname = soundname.substr(soundname.find_first_of('/') + 1);
+	soundname = soundname.substr(soundname.find_last_of('/') + 1);
 
 	if (m_SoundPool.find(soundname) == m_SoundPool.end())
 	{
@@ -169,7 +174,7 @@ SoundEffect* Resource::getSound(std::string name)
 Music* Resource::loadMusic(const char* path)
 {
 	std::string musicname(path);
-	musicname = musicname.substr(musicname.find_first_of('/') + 1);
+	musicname = musicname.substr(musicname.find_last_of('/') + 1);
 
 	if (m_MusicPool.find(musicname) == m_MusicPool.end())
 	{

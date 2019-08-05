@@ -23,7 +23,12 @@ private:
 
 	//3D space
 	glm::vec3 m_position;
+
+	//Note - rotation can only be set at the constructor
 	glm::vec3 m_rotation;
+	float m_rotationAmount;
+
+
 	glm::vec3 m_scale   ;
 
 	//Texture overriding
@@ -31,6 +36,8 @@ private:
 	bool m_boolOverrideTexture;
 
 	//Physics
+	bool m_isPhysicsObject = true;
+
 	btRigidBody*       m_body;
 	btCollisionShape*  m_colShape;
 	btDynamicsWorld*   m_parentWorld;

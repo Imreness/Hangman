@@ -5,18 +5,34 @@
 #include <string>
 #include <vector>
 
+enum class MainGameStates
+{
+	INGAME,
+	MENU,
+	GAMEOVER
+};
+
 
 class PlayState : public GameState
 {
 private:
 
 	bool m_mouseClicked = false;
+	bool m_escapePressed = false;
+
 
 	bool m_changeToMenu = false;
 
+	MainGameStates m_state = MainGameStates::INGAME;
 
 	//Session Specific
 	int m_lives = 10;
+
+	std::string m_currWord;
+	int m_guessedLetters;
+
+	void SetupNewWord(Resource* res, btDynamicsWorld* physicsWorld);
+	void CheckWord(Resource* res,Camera* cam,char letter);
 
 public:
 

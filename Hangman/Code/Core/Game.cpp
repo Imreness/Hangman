@@ -4,8 +4,7 @@
 double mouseXPos = 0, mouseYPos = 0;
 
 
-Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* icon)
-	: m_winX(windowX) , m_winY(windowY)
+Game::Game(Config config, const char* title, GLFWimage* icon)
 {
 	//Init GLFW
 	glfwInit();
@@ -15,7 +14,7 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 	glfwWindowHint(GLFW_RESIZABLE            , GLFW_FALSE);
 
 	//Create window then check it
-	m_window = glfwCreateWindow(m_winX, m_winY, title, NULL, NULL);
+	m_window = glfwCreateWindow(config.screenWidth, config.screenHeight, title, NULL, NULL);
 
 	glfwSetWindowIcon(m_window, 1, icon);
 
@@ -40,7 +39,7 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 	glEnable(GL_BLEND);
 
 	//Set other values
-	glViewport(0, 0, m_winX, m_winY);
+	glViewport(0, 0, config.screenWidth, config.screenHeight);
 	glfwSetCursorPosCallback(m_window, mousecallback);
 
 	//Fixes issues with incorrect texture loading
@@ -51,10 +50,13 @@ Game::Game(const int windowX, const int windowY, const char* title , GLFWimage* 
 	m_res     = new Resource();
 	m_audio   = new AudioEngine();
 
-	m_cam = new Camera(windowX, windowY, glm::vec3(0., 0., 0.));
+
+	m_res->m_dictionaryUseCustomWords = config.useCustomWords;
+
+	m_cam = new Camera(config.screenWidth, config.screenHeight, glm::vec3(0., 0., 0.));
 
 	//Setup the default game state
-	m_state = new PlayState();
+	m_state = new IntroState();
 	m_state->Setup(m_window,m_res,m_cam, m_physics->getWorld());
 
 
@@ -90,13 +92,12 @@ void Game::Update()
 		//Process State
 		STATECHANGE newstate = m_state->Update(m_res, m_cam, physicsWorld, DeltaTime::deltaTime);
 
+
+		glfwPollEvents();
 		m_state->ProcessKeyboard(m_window , m_cam, physicsWorld,m_res, DeltaTime::deltaTime);
 		m_state->Render(m_res , m_cam , physicsWorld);
 
-		glfwPollEvents();
 		glfwSwapBuffers(m_window);
-
-
 		if (newstate != STATECHANGE::NONE)
 		{
 			ChangeState(newstate);
@@ -106,9 +107,7 @@ void Game::Update()
 
 void Game::ChangeState(STATECHANGE changeTo)
 {
-	delete m_res;
-	m_res = new Resource();
-
+	m_res->Clean();
 	delete m_state;
 
 	std::cout << "\n\n CHANGING STATES \n\n";

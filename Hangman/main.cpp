@@ -19,7 +19,7 @@ int main()
 
 	Config config = ConfigLoader::loadConfig();
 
-	Game hangman(config.screenWidth, config.screenHeight ,  "Hangman - A game made by Imre Barta" , icon);
+	Game hangman(config, "Hangman - A game made by Imre Barta" , icon);
 
 	while (!hangman.gameShouldClose())
 	{

@@ -20,6 +20,8 @@ private:
 
 	RESOLUTION m_currResolution;
 
+	bool m_currUseCustomWordset;
+
 public:
 
 	virtual ~MenuState() {}

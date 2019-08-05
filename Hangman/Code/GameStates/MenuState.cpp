@@ -4,6 +4,8 @@ void MenuState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "basicShader");
 
+	m_currUseCustomWordset = res->m_dictionaryUseCustomWords;
+
 	btTransform objectTrans; objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(0, 1.15, 0.));
 	res->loadSound("Audio/click.wav");
 
@@ -36,7 +38,7 @@ void MenuState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 		res->LoadTexture("Textures/button_highres.png");
 		res->LoadTexture("Textures/button_midres.png");
 
-		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 3.)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 4.)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
 		res->SpawnObject("b_resolution", "Models/button.blend", "basicShader", physicsWorld, objectTrans)
 			->Scale(glm::vec3(0.5, 0.5, 0.5));
 
@@ -60,26 +62,43 @@ void MenuState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamics
 			res->getObject("b_resolution")->AttachNewOverrideTexture(res->getTexture("button_highres.png"));
 		}
 
+		res->LoadTexture("Textures/wordset_def.jpg");
+		res->LoadTexture("Textures/wordset_cus.jpg");
+
+		Texture* wordsetTexture;
+		if (res->m_dictionaryUseCustomWords)
+			wordsetTexture = res->getTexture("wordset_cus.jpg");
+		else
+			wordsetTexture = res->getTexture("wordset_def.jpg");
+
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, -0.7, 4.5)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		res->SpawnObject("wordsetLogo", "Models/banner.blend", "basicShader", nullptr, objectTrans, true, wordsetTexture)
+			->Scale(glm::vec3(0.2, 0.2, 0.2));
+
+		Texture* changwordsetTexture = res->LoadTexture("Textures/button_change.png");
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, -0.7, 3.23)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		res->SpawnObject("b_changewordset", "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, changwordsetTexture)
+			->Scale(glm::vec3(0.5, 0.5, 0.5));
 
 		Texture* lowerresTexture = res->LoadTexture("Textures/button_left.png");
-		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 4)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 5)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
 		res->SpawnObject("b_lowerres", "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, lowerresTexture)
 			->Scale(glm::vec3(0.25, 0.5, 0.5));
 
 		Texture* higherresTexture = res->LoadTexture("Textures/button_right.png");
-		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 2)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 3)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
 		res->SpawnObject("b_higherres", "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, higherresTexture)
 			->Scale(glm::vec3(0.25, 0.5, 0.5));
 
 		Texture* applyresTexture = res->LoadTexture("Textures/button_apply.png");
-		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, -0.7, 3.5)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, 0.7, 2)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
 		res->SpawnObject("b_applyres", "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, applyresTexture)
-			->Scale(glm::vec3(0.45, 0.45, 0.45));
+			->Scale(glm::vec3(0.5, 0.5, 0.5));
 
 		Texture* backoptionsTexture = res->LoadTexture("Textures/button_back.png");
-		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, -0.7, 2.5)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
+		objectTrans.setIdentity(); objectTrans.setOrigin(btVector3(-4, -0.7, 2)); objectTrans.setRotation(btQuaternion(1.58, 0, 0));
 		res->SpawnObject("b_backoptions", "Models/button.blend", "basicShader", physicsWorld, objectTrans, true, backoptionsTexture)
-			->Scale(glm::vec3(0.45, 0.45, 0.45));
+			->Scale(glm::vec3(0.5, 0.5, 0.5)); 
 	}
 	
 	cam->SetTransform(glm::vec3(0., 0., 3.), -90., 0.);
@@ -155,6 +174,48 @@ void MenuState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld
 				cam->SetTargetPos_rail(glm::vec3(0, 0., 3), -90., 0.);
 			}
 
+			else if (((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() == "b_changewordset")
+			{
+				res->getSound("click.wav")->Play();
+				if (m_currUseCustomWordset)
+				{
+					m_currUseCustomWordset = false;
+					res->getObject("wordsetLogo")->AttachNewOverrideTexture(res->getTexture("wordset_def.jpg"));
+				}
+				else
+				{
+					m_currUseCustomWordset = true;
+					res->getObject("wordsetLogo")->AttachNewOverrideTexture(res->getTexture("wordset_cus.jpg"));
+				}
+
+				res->m_dictionaryUseCustomWords = m_currUseCustomWordset;
+
+				switch (m_currResolution)
+				{
+				case RESOLUTION::LOWRES:
+					glfwSetWindowSize(window, 896, 504);
+					glViewport(0, 0, 896, 504);
+					cam->RecalculateProjection(896, 504);
+					ConfigLoader::SaveConfig("low", m_currUseCustomWordset);
+					break;
+				case RESOLUTION::MIDRES:
+					glfwSetWindowSize(window, 1280, 720);
+					glViewport(0, 0, 1280, 720);
+					cam->RecalculateProjection(1280, 720);
+					ConfigLoader::SaveConfig("mid", m_currUseCustomWordset);
+					break;
+				case RESOLUTION::HIGHRES:
+					glfwSetWindowSize(window, 1536, 864);
+					glViewport(0, 0, 1536, 864);
+					cam->RecalculateProjection(1536, 864);
+					ConfigLoader::SaveConfig("high", m_currUseCustomWordset);
+					break;
+				default:
+					break;
+				}
+
+			}
+
 			else if (((Object*)rayCallback.m_collisionObject->getUserPointer())->getName() == "b_higherres")
 			{
 				res->getSound("click.wav")->Play();
@@ -207,19 +268,19 @@ void MenuState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld
 					glfwSetWindowSize(window, 896, 504);
 					glViewport(0, 0, 896, 504);
 					cam->RecalculateProjection(896, 504);
-					ConfigLoader::SaveConfig("low");
+					ConfigLoader::SaveConfig("low", m_currUseCustomWordset);
 					break;
 				case RESOLUTION::MIDRES:
 					glfwSetWindowSize(window, 1280, 720);
 					glViewport(0, 0, 1280, 720);
 					cam->RecalculateProjection(1280, 720);
-					ConfigLoader::SaveConfig("mid");
+					ConfigLoader::SaveConfig("mid", m_currUseCustomWordset);
 					break;
 				case RESOLUTION::HIGHRES:
 					glfwSetWindowSize(window, 1536, 864);
 					glViewport(0, 0, 1536, 864);
 					cam->RecalculateProjection(1536, 864);
-					ConfigLoader::SaveConfig("high");
+					ConfigLoader::SaveConfig("high", m_currUseCustomWordset);
 					break;
 				default:
 					break;

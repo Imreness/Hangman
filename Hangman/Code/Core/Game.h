@@ -19,7 +19,6 @@ private:
 	//General
 	GLFWwindow* m_window;
 	Camera*     m_cam;
-	const int   m_winX, m_winY;
 
 	//Other Systems
 	GameState*     m_state;
@@ -34,7 +33,7 @@ private:
 
 public:
 	//Setup the GLFW window, check all the libaries
-	Game(const int windowX, const int windowY, const char* title , GLFWimage* icon);
+	Game(Config config, const char* title , GLFWimage* icon);
 
 	void Update();
 
