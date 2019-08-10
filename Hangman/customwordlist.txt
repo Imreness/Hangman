@@ -1,7 +1,10 @@
 ﻿# Lines starting with '#' will be ignored
 # Just write in a word in each line. 1 word/line!
 # If you edit this file mid-game, go back to the menu and back into the game to reload the file
-# !!! - If a word doesnt follow these rules, they wont be picked: - !!!
+# !!! - If a word doesnt follow these rules, it wont be picked: - !!!
 # 	- Character Limit is 19 characters!
 #	- ASCII characters only! Standard English alphabet
 #	- No spaces!
+lolman 
+yes
+no

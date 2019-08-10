@@ -7,6 +7,7 @@ class IntroState : public GameState
 {
 private:
 
+	//Animation flags
 	bool m_switchToMenu = false;
 	bool m_showedMadeby = false;
 	bool m_showedLogo = false;

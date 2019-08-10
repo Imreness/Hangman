@@ -5,17 +5,19 @@ void IntroState::Setup(GLFWwindow* window, Resource* res, Camera* cam, btDynamic
 {
 	res->loadShader("Shaders/object.vert", "Shaders/object.frag", "basicShader");
 
-	Texture* logoTexture = res->LoadTexture("Textures/logo.jpg");
-	btTransform logoTrans; logoTrans.setIdentity(); logoTrans.setOrigin(btVector3(10., 0., 0.));
-	res->SpawnObject("logo", "Models/banner.blend", "basicShader", physicsWorld, logoTrans, true, logoTexture);
-
-	Texture* madebyTexture = res->LoadTexture("Textures/madeby.jpg");
-	btTransform madebyTrans; madebyTrans.setIdentity();
-	res->SpawnObject("madeby", "Models/banner.blend", "basicShader", physicsWorld, madebyTrans, true, madebyTexture);
-
 	res->loadSound("Audio/swoosh1.wav");
 	res->loadSound("Audio/swoosh2.wav");
 	res->loadSound("Audio/swoosh3.wav");
+
+
+	Texture* logoTexture = res->LoadTexture("Textures/logo.jpg");
+	btTransform logoTrans; logoTrans.setIdentity(); logoTrans.setOrigin(btVector3(10., 0., 0.));
+	res->SpawnObject("logo", "Models/banner.assbin", "basicShader", physicsWorld, logoTrans, true, logoTexture);
+
+	Texture* madebyTexture = res->LoadTexture("Textures/madeby.jpg");
+	btTransform madebyTrans; madebyTrans.setIdentity();
+	res->SpawnObject("madeby", "Models/banner.assbin", "basicShader", physicsWorld, madebyTrans, true, madebyTexture);
+
 
 	cam->SetTransform(glm::vec3(-10., 0., 3.), -90., 0.);
 	cam->SetTargetPos_rail(glm::vec3(0., 0., 3.), -90., 0., m_animationSpeed);
@@ -30,7 +32,6 @@ STATECHANGE IntroState::Update(Resource* res, Camera* cam, btDynamicsWorld* phys
 		res->getSound("swoosh1.wav")->Play();
 		m_playedFirstSound = true;
 	}
-
 
 	m_animationTimer += delta;
 
@@ -67,7 +68,7 @@ STATECHANGE IntroState::Update(Resource* res, Camera* cam, btDynamicsWorld* phys
 
 	if (!m_switchToMenu)
 	{
-		if (m_animationTimer >= m_animationLength)
+		if (m_animationTimer >= m_animationLength / 2.f)
 		{
 			m_switchToMenu = true;
 			m_animationTimer = 0.;
@@ -76,9 +77,6 @@ STATECHANGE IntroState::Update(Resource* res, Camera* cam, btDynamicsWorld* phys
 		}
 		return STATECHANGE::NONE;
 	}
-
-
-
 	return STATECHANGE::NONE;
 }
 
@@ -92,11 +90,6 @@ void IntroState::Render(Resource* res, Camera* cam, btDynamicsWorld* physicsWorl
 
 void IntroState::ProcessKeyboard(GLFWwindow* window, Camera* cam, btDynamicsWorld* physicsWorld, Resource* res, float delta)
 {
-	if (glfwGetKey(window, GLFW_KEY_F9) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, true);
-	}
-
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS ||
 		glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS ||
 		glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)

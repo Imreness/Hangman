@@ -13,7 +13,7 @@ Config ConfigLoader::loadConfig()
 		std::ofstream newconfigFile("config.ini");
 		newconfigFile << "#resolution - can be low, mid or high\nlow\n";
 		config.screenWidth = 896; config.screenHeight = 504;
-		newconfigFile << "def";
+		newconfigFile << "#wordset - def for default, cus for custom\ndef";
 		config.useCustomWords = false;
 		return config;
 	}

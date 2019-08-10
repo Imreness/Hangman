@@ -14,13 +14,13 @@ enum class RESOLUTION
 class MenuState : public GameState
 {
 private:
+	//Flags
 	bool m_mouseClicked = false;
-
 	bool m_switchToPlay = false;
+	bool m_currUseCustomWordset;
+
 
 	RESOLUTION m_currResolution;
-
-	bool m_currUseCustomWordset;
 
 public:
 

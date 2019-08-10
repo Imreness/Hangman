@@ -8,6 +8,8 @@ Dictionary::Dictionary()
 
 void Dictionary::LoadNewDictionary(const char* path)
 {
+	m_words.clear();
+
 	std::ifstream file(path);
 
 	if (file.fail())

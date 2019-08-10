@@ -33,6 +33,9 @@ private:
 public:
 	bool m_dictionaryUseCustomWords = false;
 
+	//Easteregg
+	bool m_useChadWarden = false;
+
 	Resource() { m_dictionary = new Dictionary(); }
 
 	void LoadDictionary(const char* path);
